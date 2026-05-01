@@ -19,3 +19,6 @@ Thumbs.db
 
 # Secrets files
 secrets.*
+
+# Working files
+wfile.*
