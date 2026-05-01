@@ -1,10 +1,16 @@
 import streamlit as st
+import pandas as pd
+from services.google_sheets import get_sheet
 
-st.title("🚀 My First Streamlit App")
+st.title("📊 Exercise Tracker")
 
-st.write("Hello! This is a bare-bones demo.")
+# Load data
+sheet = get_sheet()
+data = sheet.get_all_records()
 
-name = st.text_input("What's your name?")
+# Convert to DataFrame
+df = pd.DataFrame(data)
 
-if name:
-    st.success(f"Nice to meet you, {name} 👋")
+# Display
+st.subheader("Your Data")
+st.dataframe(df)
