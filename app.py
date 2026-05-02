@@ -2,28 +2,72 @@
 import streamlit as st
 
 # Modules
-from services.master_data.read_md import get_unique_categories
-
-# Data Input
-categories = get_unique_categories()
-
-category_options = categories + ["➕ Add New Category"]
-
-selected_category = st.selectbox(
-    "Select Category",
-    category_options
+from services.master_data.read_md import (
+    get_master_data,
 )
 
-if selected_category == "➕ Add New Category":
-    new_category = st.text_input("Enter new category name")
+from services.master_data.modify_md import (
+    get_unique_categories,
+    get_unique_groups,
+    get_unique_types
+)
 
-    if new_category:
-        new_category = new_category.strip()
+from services.master_data.write_md import (
+    build_new_master_data_rows,
+    append_new_master_data_rows,
+    master_data_export
+)
 
-        if new_category in categories:
-            st.warning("Category already exists")
-            category = None
-        else:
-            category = new_category
-    else:
-        category = None
+from utils.select_helpers import (
+    select_or_create,
+)
+
+from utils.input_helpers import (
+    input_block_measurements,
+)
+
+# ===== READ MASTER DATA =====
+master_data_df = get_master_data()
+
+# ===== MASTER DATA INPUT =====
+# SELECT OR CREATE CATEGORY, GROUP, TYPE, MEASUREMENTS
+categories = get_unique_categories(master_data_df)
+
+selected_category = select_or_create(
+    label="Select or Create Category",
+    options=categories,
+    new_label="➕ Add New Category"
+)
+
+groups = get_unique_groups(master_data_df, selected_category)
+
+selected_group = select_or_create(
+    label="Select or Create Group",
+    options=groups,
+    new_label="➕ Add New Group"
+)
+
+types = get_unique_types(master_data_df, selected_category, selected_group)
+
+selected_type = select_or_create(
+    label="Select or Create Type",
+    options=types,
+    new_label="➕ Add New Type"
+)
+
+measurements = input_block_measurements()
+
+# Write to master data
+if st.button("Submit"):
+    new_rows = build_new_master_data_rows(
+        selected_category,
+        selected_group,
+        selected_type,
+        measurements
+    )
+
+    master_data_df = append_new_master_data_rows(new_rows, master_data_df)
+
+    master_data_export(master_data_df)
+
+    st.success(f"✅ Successfully added {len(new_rows)} exercise types and measurements!")
