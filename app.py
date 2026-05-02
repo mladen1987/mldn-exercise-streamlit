@@ -1,16 +1,73 @@
+# Libraries
 import streamlit as st
-import pandas as pd
-from services.google_sheets import get_sheet
 
-st.title("📊 Exercise Tracker")
+# Modules
+from services.master_data.read_md import (
+    get_master_data,
+)
 
-# Load data
-sheet = get_sheet()
-data = sheet.get_all_records()
+from services.master_data.modify_md import (
+    get_unique_categories,
+    get_unique_groups,
+    get_unique_types
+)
 
-# Convert to DataFrame
-df = pd.DataFrame(data)
+from services.master_data.write_md import (
+    build_new_master_data_rows,
+    append_new_master_data_rows,
+    master_data_export
+)
 
-# Display
-st.subheader("Your Data")
-st.dataframe(df)
+from utils.select_helpers import (
+    select_or_create,
+)
+
+from utils.input_helpers import (
+    input_block_measurements,
+)
+
+# ===== READ MASTER DATA =====
+master_data_df = get_master_data()
+
+# ===== MASTER DATA INPUT =====
+# SELECT OR CREATE CATEGORY, GROUP, TYPE, MEASUREMENTS
+categories = get_unique_categories(master_data_df)
+
+selected_category = select_or_create(
+    label="Select or Create Category",
+    options=categories,
+    new_label="➕ Add New Category"
+)
+
+groups = get_unique_groups(master_data_df, selected_category)
+
+selected_group = select_or_create(
+    label="Select or Create Group",
+    options=groups,
+    new_label="➕ Add New Group"
+)
+
+types = get_unique_types(master_data_df, selected_category, selected_group)
+
+selected_type = select_or_create(
+    label="Select or Create Type",
+    options=types,
+    new_label="➕ Add New Type"
+)
+
+measurements = input_block_measurements()
+
+# Write to master data
+if st.button("Submit"):
+    new_rows = build_new_master_data_rows(
+        selected_category,
+        selected_group,
+        selected_type,
+        measurements
+    )
+
+    master_data_df = append_new_master_data_rows(new_rows, master_data_df)
+
+    master_data_export(master_data_df)
+
+    st.success(f"✅ Successfully added {len(new_rows)} exercise types and measurements!")

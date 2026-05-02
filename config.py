@@ -4,5 +4,12 @@ SCOPES = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive"
     ]
-SHEET_KEY = "14PK-dHt-rGaxKuO2TabNJIN8HPMONzRyFg0ANtg8fB8"
-TAB_NAME = "exercise_data"
+
+# ===== SHEET INFO =====
+# Sheet Key
+SK_MAIN_DATA = "14PK-dHt-rGaxKuO2TabNJIN8HPMONzRyFg0ANtg8fB8"
+
+# Tab Containing Main Data
+TB_MAIN_DATA = "exercise_data"
+# Tab Containing Master Data
+TB_MASTER_DATA = "exercise_master_data"

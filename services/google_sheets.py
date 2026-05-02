@@ -1,8 +1,11 @@
+# Libraries
 import gspread
 from google.oauth2.service_account import Credentials
-from config import SECRETS_PATH, SCOPES, SHEET_KEY, TAB_NAME
 
-# Google Sheets API client setup
+# Variables
+from config import SECRETS_PATH, SCOPES
+
+# ===== GOOGLE SHEETS API =====
 def get_client(secrets_path=SECRETS_PATH):
     scope = SCOPES
 
@@ -13,7 +16,14 @@ def get_client(secrets_path=SECRETS_PATH):
     client = gspread.authorize(creds)
     return client
 
-# Get data from a specific sheet
-def get_sheet():
+# ===== GET SHEET =====
+def get_sheet(sheet_key, tab_name):
     client = get_client()
-    return client.open_by_key(SHEET_KEY).worksheet(TAB_NAME)
+    return client.open_by_key(sheet_key).worksheet(tab_name)
+
+# ===== OVERWRITE SHEET =====
+def overwrite_sheet(headers, data, sheet_key, tab_name):
+    sheet = get_sheet(sheet_key, tab_name)
+    sheet.resize(rows=len(data) + 1)
+    sheet.clear()
+    sheet.update([headers] + data)
