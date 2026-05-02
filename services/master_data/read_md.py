@@ -16,3 +16,20 @@ def get_master_data():
     df = pd.DataFrame(data)
 
     return df
+
+def get_unique_categories():
+    df = get_master_data()
+
+    if df.empty:
+        return []
+
+    categories = (
+        df["category"]
+        .dropna()
+        .astype(str)
+        .str.strip()
+        .unique()
+        .tolist()
+    )
+
+    return sorted(categories)
