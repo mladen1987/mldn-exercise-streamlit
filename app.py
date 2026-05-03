@@ -46,6 +46,7 @@ tab_input, tab_remove = st.tabs([
 # ===============
 with tab_input:
 
+    # ===== Select Category =====
     categories = get_unique_categories(master_data_df)
 
     selected_category = select_or_create(
@@ -54,43 +55,63 @@ with tab_input:
         new_label="➕ Add New Category"
     )
 
-    groups = get_unique_groups(master_data_df, selected_category)
+    # ===== Select Group =====
+    if selected_category:
 
-    selected_group = select_or_create(
-        label="Select or Create Group",
-        options=groups,
-        new_label="➕ Add New Group"
-    )
+        groups = get_unique_groups(master_data_df, selected_category)
 
-    types = get_unique_types(master_data_df, selected_category, selected_group)
-
-    selected_type = select_or_create(
-        label="Select or Create Type",
-        options=types,
-        new_label="➕ Add New Type"
-    )
-
-    measurements = input_block_measurements()
-
-    # Write to master data
-    if st.button("Submit"):
-        new_rows = build_new_master_data_rows(
-            selected_category,
-            selected_group,
-            selected_type,
-            measurements
+        selected_group = select_or_create(
+            label="Select or Create Group",
+            options=groups,
+            new_label="➕ Add New Group"
         )
 
-        master_data_df = append_new_master_data_rows(new_rows, master_data_df)
+    else:
+        selected_group = None
 
-        master_data_export(master_data_df)
+    # ===== Select Type =====
+    if selected_group:
+        types = get_unique_types(master_data_df, selected_category, selected_group)
 
-        st.success(f"✅ Successfully added {len(new_rows)} exercise types and measurements!")
+        selected_type = select_or_create(
+            label="Select or Create Type",
+            options=types,
+            new_label="➕ Add New Type"
+        )
+
+    else:
+        selected_type = None
+
+    # ===== Add Measurement =====
+    if selected_type:
+        measurements = input_block_measurements()
+
+    else:
+        measurements = None
+
+    # ===== Submit New Values =====
+    if selected_category and selected_group and selected_type and measurements:
+        # Write to master data
+        if st.button("Submit"):
+            new_rows = build_new_master_data_rows(
+                selected_category,
+                selected_group,
+                selected_type,
+                measurements
+            )
+
+            master_data_df = append_new_master_data_rows(new_rows, master_data_df)
+
+            master_data_export(master_data_df)
+
+            st.success(f"✅ Successfully added {len(new_rows)} exercise types and measurements!")
 
 # ===============
 # MASTER DATA REMOVE
 # ===============
 with tab_remove:
+    
+    # ===== Select Category =====
     categories = get_unique_categories(master_data_df)
 
     selected_category = st.selectbox(
@@ -98,26 +119,41 @@ with tab_remove:
         options=categories
     )
 
-    groups = get_unique_groups(master_data_df, selected_category)
+    # ===== Select Group =====
+    if selected_category:
+        groups = get_unique_groups(master_data_df, selected_category)
 
-    selected_group = select_or_all(
-        label="Select Group",
-        options=groups,
-        all_label="✅ Select All Groups"
-    )
+        selected_group = select_or_all(
+            label="Select Group",
+            options=groups,
+            all_label="✅ Select All Groups"
+        )
 
-    types = get_unique_types(master_data_df, selected_category, selected_group)
+    else:
+        selected_group = None
+    
+    # ===== Select Type =====
+    if selected_group:
+        types = get_unique_types(master_data_df, selected_category, selected_group)
 
-    selected_type = select_or_all(
-        label="Select Type",
-        options=types,
-        all_label="✅ Select All Types"
-    )
+        selected_type = select_or_all(
+            label="Select Type",
+            options=types,
+            all_label="✅ Select All Types"
+        )
 
-    measurements = get_unique_measurements(master_data_df, selected_category, selected_group, selected_type)
+    else:
+        selected_type = None
 
-    selected_measurement = select_or_all(
-        label="Select Measurement",
-        options=measurements,
-        all_label="✅ Select All Measurements"
-    )
+    # ===== Select Measurement =====
+    if selected_type:
+        measurements = get_unique_measurements(master_data_df, selected_category, selected_group, selected_type)
+    
+        selected_measurement = select_or_all(
+            label="Select Measurement",
+            options=measurements,
+            all_label="✅ Select All Measurements"
+        )
+
+    else:
+        measurements = None
