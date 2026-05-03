@@ -25,3 +25,26 @@ def select_or_create(
         return None
 
     return selection
+
+def select_or_all(
+    label,
+    options,
+    all_label="✅ Select All",
+):
+    """
+    Multi-select with 'Select All' option.
+    Returns a list of selected values.
+    """
+
+    options_with_all = [all_label] + options
+
+    selection = st.multiselect(
+        label,
+        options_with_all
+    )
+
+    # If user selects "Select All"
+    if all_label in selection:
+        return options
+
+    return selection

@@ -9,7 +9,8 @@ from services.master_data.read_md import (
 from services.master_data.modify_md import (
     get_unique_categories,
     get_unique_groups,
-    get_unique_types
+    get_unique_types,
+    get_unique_measurements
 )
 
 from services.master_data.write_md import (
@@ -20,54 +21,103 @@ from services.master_data.write_md import (
 
 from utils.select_helpers import (
     select_or_create,
+    select_or_all
 )
 
 from utils.input_helpers import (
     input_block_measurements,
 )
 
-# ===== READ MASTER DATA =====
+# ===============
+# GET DATA
+# ===============
 master_data_df = get_master_data()
 
-# ===== MASTER DATA INPUT =====
-# SELECT OR CREATE CATEGORY, GROUP, TYPE, MEASUREMENTS
-categories = get_unique_categories(master_data_df)
+# ===============
+# TABS
+# ===============
+tab_input, tab_remove = st.tabs([
+    "➕ Add Exercise Type",
+    "🗑️ Remove Exercise Type"
+])
 
-selected_category = select_or_create(
-    label="Select or Create Category",
-    options=categories,
-    new_label="➕ Add New Category"
-)
+# ===============
+# MASTER DATA INPUT
+# ===============
+with tab_input:
 
-groups = get_unique_groups(master_data_df, selected_category)
+    categories = get_unique_categories(master_data_df)
 
-selected_group = select_or_create(
-    label="Select or Create Group",
-    options=groups,
-    new_label="➕ Add New Group"
-)
-
-types = get_unique_types(master_data_df, selected_category, selected_group)
-
-selected_type = select_or_create(
-    label="Select or Create Type",
-    options=types,
-    new_label="➕ Add New Type"
-)
-
-measurements = input_block_measurements()
-
-# Write to master data
-if st.button("Submit"):
-    new_rows = build_new_master_data_rows(
-        selected_category,
-        selected_group,
-        selected_type,
-        measurements
+    selected_category = select_or_create(
+        label="Select or Create Category",
+        options=categories,
+        new_label="➕ Add New Category"
     )
 
-    master_data_df = append_new_master_data_rows(new_rows, master_data_df)
+    groups = get_unique_groups(master_data_df, selected_category)
 
-    master_data_export(master_data_df)
+    selected_group = select_or_create(
+        label="Select or Create Group",
+        options=groups,
+        new_label="➕ Add New Group"
+    )
 
-    st.success(f"✅ Successfully added {len(new_rows)} exercise types and measurements!")
+    types = get_unique_types(master_data_df, selected_category, selected_group)
+
+    selected_type = select_or_create(
+        label="Select or Create Type",
+        options=types,
+        new_label="➕ Add New Type"
+    )
+
+    measurements = input_block_measurements()
+
+    # Write to master data
+    if st.button("Submit"):
+        new_rows = build_new_master_data_rows(
+            selected_category,
+            selected_group,
+            selected_type,
+            measurements
+        )
+
+        master_data_df = append_new_master_data_rows(new_rows, master_data_df)
+
+        master_data_export(master_data_df)
+
+        st.success(f"✅ Successfully added {len(new_rows)} exercise types and measurements!")
+
+# ===============
+# MASTER DATA REMOVE
+# ===============
+with tab_remove:
+    categories = get_unique_categories(master_data_df)
+
+    selected_category = st.selectbox(
+        label="Select Category",
+        options=categories
+    )
+
+    groups = get_unique_groups(master_data_df, selected_category)
+
+    selected_group = select_or_all(
+        label="Select Group",
+        options=groups,
+        all_label="✅ Select All Groups"
+    )
+
+    types = get_unique_types(master_data_df, selected_category, selected_group)
+
+    selected_type = select_or_all(
+        label="Select Type",
+        options=types,
+        all_label="✅ Select All Types"
+    )
+
+    measurements = get_unique_measurements(master_data_df, selected_category, selected_group, selected_type)
+
+    selected_measurement = select_or_all(
+        label="Select Measurement",
+        options=measurements,
+        all_label="✅ Select All Measurements"
+    )
