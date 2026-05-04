@@ -1,6 +1,10 @@
 def render_master_data_remove_page(master_data_df):
-    
-    import streamlit as st
+
+    import streamlit as st    
+
+    from services.google_sheets import get_client
+
+    from services.master_data.backup_md import backup_master_data_to_sheet
 
     from services.master_data.read_md import (
         get_unique_categories,
@@ -9,9 +13,17 @@ def render_master_data_remove_page(master_data_df):
         get_unique_measurements
     )
 
+    from services.master_data.write_md import (
+        rows_to_remove,
+        remove_master_data_rows,
+        master_data_export
+    )
+
     from utils.select_helpers import (
         select_or_all
     )
+
+    from config import SK_BACKUP_DATA, TB_MASTER_DATA
 
     # ===== Select Category =====
     categories = get_unique_categories(master_data_df)
@@ -58,4 +70,40 @@ def render_master_data_remove_page(master_data_df):
         )
 
     else:
-        measurements = None
+        selected_measurement = None
+
+    # ===== Data to Remove =====
+    if selected_group:
+        rows_to_remove = rows_to_remove(
+            df=master_data_df,
+            category=selected_category,
+            group=selected_group,
+            type_=selected_type,
+            measurements=selected_measurement
+        )
+
+        st.write(f"To Remove: {len(rows_to_remove)}")
+        st.dataframe(rows_to_remove[
+            ["category",
+             "group",
+             "type",
+             "measurement",
+             "uom"
+             ]
+        ])
+
+        if st.button("Confirm Remove"):
+            backup_name = backup_master_data_to_sheet(
+                client=get_client(),
+                backup_sheet_key=SK_BACKUP_DATA,
+                df=master_data_df,
+                tab_name=TB_MASTER_DATA
+            )
+            
+            updated_master_data_df = remove_master_data_rows(rows_to_remove, master_data_df)
+            
+            master_data_export(updated_master_data_df)
+
+            st.success(f"✅ Successfully removed {len(rows_to_remove)} exercise types and measurements!")
+            st.info(f"📁 Backup of original Master Data saved to sheet: {backup_name}")
+            

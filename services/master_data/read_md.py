@@ -78,17 +78,17 @@ def get_unique_types(df, category, group):
     
     return return_val
 
-def get_unique_measurements(df, category, group, type):
+def get_unique_measurements(df, category, group, type_):
     category = ensure_list(category)
     group = ensure_list(group)
-    type = ensure_list(type)
+    type_ = ensure_list(type_)
 
-    if category and group and type:
+    if category and group and type_:
         measurements = (
             df[
                 (df["category"].isin(category))
                 & (df["group"].isin(group))
-                & (df["type"].isin(type))
+                & (df["type"].isin(type_))
             ]["measurement"]
             .dropna()
             .astype(str)

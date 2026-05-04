@@ -6,14 +6,12 @@ from services.google_sheets import (
     overwrite_sheet
 )
 
+from utils.data_type_helpers import ensure_list
+
 # Variables
 from config import SK_MAIN_DATA, TB_MASTER_DATA
 
 def build_new_master_data_rows(category, group, type_, measurements):
-    """
-    Converts UI inputs into master_data rows.
-    """
-
     new_rows = []
 
     base_key = f"{category}_{group}_{type_}".lower().replace(" ", "_")
@@ -55,3 +53,35 @@ def master_data_export(df):
         sheet_key=SK_MAIN_DATA,
         tab_name=TB_MASTER_DATA
     )
+
+def rows_to_remove(df, category, group, type_, measurements):
+    filtered_df = df.copy()
+
+    category = ensure_list(category)
+    group = ensure_list(group)
+    type_ = ensure_list(type_)
+    measurements = ensure_list(measurements)
+
+    # Apply filters only if values exist
+    if category:
+        filtered_df = filtered_df[filtered_df["category"].isin(category)]
+
+    if group:
+        filtered_df = filtered_df[filtered_df["group"].isin(group)]
+
+    if type_:
+        filtered_df = filtered_df[filtered_df["type"].isin(type_)]
+
+    if measurements:
+        filtered_df = filtered_df[filtered_df["measurement"].isin(measurements)]
+
+    return filtered_df
+
+def remove_master_data_rows(rows_to_remove, df):
+    
+    if not rows_to_remove.empty:
+        updated_master_data_df = df.drop(rows_to_remove.index)
+    else:
+        updated_master_data_df = df.copy()
+
+    return updated_master_data_df 
