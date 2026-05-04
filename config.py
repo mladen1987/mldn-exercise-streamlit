@@ -8,6 +8,7 @@ SCOPES = [
 # ===== SHEET INFO =====
 # Sheet Key
 SK_MAIN_DATA = "14PK-dHt-rGaxKuO2TabNJIN8HPMONzRyFg0ANtg8fB8"
+SK_BACKUP_DATA = "1wBGpo6nj2cnbXLfW_n5fdJu4qe4g9VLTXDSFsTGi9Yk"
 
 # Tab Containing Main Data
 TB_MAIN_DATA = "exercise_data"

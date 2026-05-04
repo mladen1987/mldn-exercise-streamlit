@@ -4,6 +4,8 @@ import pandas as pd
 # Functions
 from services.google_sheets import get_sheet
 
+from utils.data_type_helpers import ensure_list
+
 # Variables
 from config import SK_MAIN_DATA, TB_MASTER_DATA
 
@@ -16,3 +18,88 @@ def get_master_data():
     df = pd.DataFrame(data)
 
     return df
+
+def get_unique_categories(df):
+    if df.empty:
+        return []
+
+    categories = (
+        df["category"]
+        .dropna()
+        .astype(str)
+        .str.strip()
+        .unique()
+        .tolist()
+    )
+
+    return sorted(categories)
+
+def get_unique_groups(df, category):
+    category = ensure_list(category)
+
+    if category:
+        groups = (
+            df[df["category"].isin(category)]["group"]
+            .dropna()
+            .astype(str)
+            .str.strip()
+            .unique()
+            .tolist()
+        )
+
+        return_val = sorted(groups)
+    
+    else:
+        return_val = []
+    
+    return return_val
+
+def get_unique_types(df, category, group):
+    category = ensure_list(category)
+    group = ensure_list(group)
+
+    if category and group:
+        types = (
+            df[
+                (df["category"].isin(category))
+                & (df["group"].isin(group))
+            ]["type"]
+            .dropna()
+            .astype(str)
+            .str.strip()
+            .unique()
+            .tolist()
+        )
+
+        return_val = sorted(types)
+
+    else:
+        return_val = []
+    
+    return return_val
+
+def get_unique_measurements(df, category, group, type_):
+    category = ensure_list(category)
+    group = ensure_list(group)
+    type_ = ensure_list(type_)
+
+    if category and group and type_:
+        measurements = (
+            df[
+                (df["category"].isin(category))
+                & (df["group"].isin(group))
+                & (df["type"].isin(type_))
+            ]["measurement"]
+            .dropna()
+            .astype(str)
+            .str.strip()
+            .unique()
+            .tolist()
+        )
+
+        return_val = sorted(measurements)
+
+    else:
+        return_val = []
+
+    return return_val
