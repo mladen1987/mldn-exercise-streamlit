@@ -2,7 +2,7 @@ def render_master_data_remove_page(master_data_df):
     
     import streamlit as st
 
-    from services.master_data.modify_md import (
+    from services.master_data.read_md import (
         get_unique_categories,
         get_unique_groups,
         get_unique_types,
