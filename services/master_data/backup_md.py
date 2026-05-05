@@ -1,6 +1,31 @@
-def backup_master_data_to_sheet(client, backup_sheet_key, df, tab_name):
-    from datetime import datetime
+from datetime import datetime
 
+from utils.data_source_helpers import extract_timestamp
+
+def cleanup_old_backups(backup_spreadsheet, keep_last_n=5):
+    
+    worksheets = backup_spreadsheet.worksheets()
+
+    # Keep only backup sheets
+    backup_sheets = [
+        ws for ws in worksheets if ws.title.startswith("backup_")
+    ]
+
+    # Sort by timestamp (newest first)
+    backup_sheets_sorted = sorted(
+        backup_sheets,
+        key=lambda ws: extract_timestamp(ws.title),
+        reverse=True
+    )
+
+    # Identify sheets to delete
+    sheets_to_delete = backup_sheets_sorted[keep_last_n:]
+
+    # Delete oldest
+    for ws in sheets_to_delete:
+        backup_spreadsheet.del_worksheet(ws)
+
+def backup_master_data_to_sheet(client, backup_sheet_key, df, tab_name):
     # Open backup spreadsheet
     backup_spreadsheet = client.open_by_key(backup_sheet_key)
 
@@ -22,4 +47,7 @@ def backup_master_data_to_sheet(client, backup_sheet_key, df, tab_name):
     # Write data
     worksheet.update([headers] + data)
 
+    # Limit number of backups
+    cleanup_old_backups(backup_spreadsheet, keep_last_n=5)
+    
     return worksheet_name

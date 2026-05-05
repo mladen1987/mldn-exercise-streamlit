@@ -1,26 +1,26 @@
+import streamlit as st
+
+from services.master_data.read_md import (
+    get_unique_categories,
+    get_unique_groups,
+    get_unique_types,
+)
+
+from services.master_data.write_md import (
+    build_new_master_data_rows,
+    append_new_master_data_rows,
+    master_data_export
+)
+
+from utils.select_helpers import (
+    select_or_create,
+)
+
+from utils.input_helpers import (
+    input_block_measurements,
+)
+
 def render_master_data_input_page(master_data_df):
-
-    import streamlit as st
-
-    from services.master_data.read_md import (
-        get_unique_categories,
-        get_unique_groups,
-        get_unique_types,
-    )
-
-    from services.master_data.write_md import (
-        build_new_master_data_rows,
-        append_new_master_data_rows,
-        master_data_export
-    )
-
-    from utils.select_helpers import (
-        select_or_create,
-    )
-
-    from utils.input_helpers import (
-        input_block_measurements,
-    )
 
     # ===== Select Category =====
     categories = get_unique_categories(master_data_df)
