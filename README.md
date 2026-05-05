@@ -10,7 +10,7 @@ The app connects to Google Sheets and allows managing exercise master data for t
 
 ## 🚀 Version
 
-**v0.2.0 - Master Data CRUD (Input + Remove)**
+**v0.3.0 - Master Data Management (CRUD + Backup & Restore)**
 
 ---
 
@@ -29,7 +29,18 @@ The app connects to Google Sheets and allows managing exercise master data for t
   - Filter by category → group → type → measurement  
   - Supports partial and multi-select filtering  
   - Preview rows before deletion  
-  - Safe delete with backup to separate Google Sheet  
+  - Safe delete with automatic backup  
+
+- 💾 Backup system:
+  - Backups stored in a separate Google Sheet  
+  - Timestamped backup versions  
+  - Automatic cleanup (keeps latest 5 backups)  
+
+- ♻️ Restore system:
+  - View available backups with timestamps  
+  - Preview backup data before restoring  
+  - Restore full master data from selected backup  
+  - Automatic backup before restore (safety layer)  
 
 ---
 
@@ -49,8 +60,10 @@ The app connects to Google Sheets and allows managing exercise master data for t
 - [x] Master data read + write flow  
 - [x] Dynamic input system (category/group/type/measurements)  
 - [x] Delete existing master data entries (with backup)  
-- [ ] Restore from backup  
+- [x] Backup management (limit + cleanup)  
+- [x] Restore from backup  
 - [ ] Improve UI/UX (searchable dropdowns, validation)  
+- [ ] Add data visualization module  
 
 ---
 
