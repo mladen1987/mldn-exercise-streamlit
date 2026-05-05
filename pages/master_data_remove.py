@@ -75,7 +75,7 @@ def render_master_data_remove_page(master_data_df):
 
     # ===== Data to Remove =====
     if selected_group:
-        rows_to_remove = rows_to_remove(
+        df_rows_to_remove = rows_to_remove(
             df=master_data_df,
             category=selected_category,
             group=selected_group,
@@ -83,8 +83,8 @@ def render_master_data_remove_page(master_data_df):
             measurements=selected_measurement
         )
 
-        st.write(f"To Remove: {len(rows_to_remove)}")
-        st.dataframe(rows_to_remove[
+        st.write(f"To Remove: {len(df_rows_to_remove)}")
+        st.dataframe(df_rows_to_remove[
             ["category",
              "group",
              "type",
@@ -101,9 +101,9 @@ def render_master_data_remove_page(master_data_df):
                 tab_name=TB_MASTER_DATA
             )
             
-            updated_master_data_df = remove_master_data_rows(rows_to_remove, master_data_df)
+            updated_master_data_df = remove_master_data_rows(df_rows_to_remove, master_data_df)
             
             master_data_export(updated_master_data_df)
 
-            st.success(f"✅ Successfully removed {len(rows_to_remove)} exercise types and measurements!")
+            st.success(f"✅ Successfully removed {len(df_rows_to_remove)} exercise types and measurements!")
             st.info(f"📁 Backup of original Master Data saved to sheet: {backup_name}")
