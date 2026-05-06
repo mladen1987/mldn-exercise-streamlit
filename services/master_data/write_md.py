@@ -14,7 +14,7 @@ from config import SK_MAIN_DATA, TB_MASTER_DATA
 def build_new_master_data_rows(category, group, type_, measurements):
     new_rows = []
 
-    base_key = f"{category}_{group}_{type_}".lower().replace(" ", "_")
+    base_key = f"{category}_{group}_{type_}".lower().replace(" ", "-")
 
     for m in measurements:
         if m.get("measurement") and m.get("uom"):
@@ -30,7 +30,7 @@ def build_new_master_data_rows(category, group, type_, measurements):
                 "exercise_key": base_key,
                 "exercise_measurement_key": f"{base_key}_{measurement}_{uom}"
                     .lower()
-                    .replace(" ", "_")
+                    .replace(" ", "-")
             })
 
     return new_rows
