@@ -1,5 +1,11 @@
 import streamlit as st
 
+from config import (
+    # Column Names
+    MEASUREMENT_COLUMN_MD,
+    UOM_COLUMN_MD
+)
+
 def input_block_measurements(label="Measurements", state_key="measurements"):
     
     st.subheader(label)
@@ -11,8 +17,8 @@ def input_block_measurements(label="Measurements", state_key="measurements"):
     # Add button
     if st.button("➕ Add Measurement"):
         st.session_state[state_key].append({
-            "measurement": "",
-            "uom": ""
+            MEASUREMENT_COLUMN_MD: "",
+            UOM_COLUMN_MD: ""
         })
 
     # Render dynamic inputs
@@ -20,16 +26,16 @@ def input_block_measurements(label="Measurements", state_key="measurements"):
         col1, col2 = st.columns(2)
 
         with col1:
-            row["measurement"] = st.text_input(
+            row[MEASUREMENT_COLUMN_MD] = st.text_input(
                 f"Measurement {i+1}",
-                value=row["measurement"],
+                value=row[MEASUREMENT_COLUMN_MD],
                 key=f"{state_key}_m_{i}"
             )
 
         with col2:
-            row["uom"] = st.text_input(
+            row[UOM_COLUMN_MD] = st.text_input(
                 f"UOM {i+1}",
-                value=row["uom"],
+                value=row[UOM_COLUMN_MD],
                 key=f"{state_key}_u_{i}"
             )
 

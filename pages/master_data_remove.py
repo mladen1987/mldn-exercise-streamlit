@@ -21,7 +21,16 @@ from utils.select_helpers import (
     select_or_all
 )
 
-from config import SK_BACKUP_DATA, TB_MASTER_DATA
+from config import (
+    SK_BACKUP_DATA,
+    TB_MASTER_DATA,
+    # Column Names
+    CATEGORY_COLUMN_MD,
+    GROUP_COLUMN_MD,
+    TYPE_COLUMN_MD,
+    MEASUREMENT_COLUMN_MD,
+    UOM_COLUMN_MD
+)
 
 
 def render_master_data_remove_page(master_data_df):
@@ -85,12 +94,11 @@ def render_master_data_remove_page(master_data_df):
 
         st.write(f"To Remove: {len(df_rows_to_remove)}")
         st.dataframe(df_rows_to_remove[
-            ["category",
-             "group",
-             "type",
-             "measurement",
-             "uom"
-             ]
+            [CATEGORY_COLUMN_MD,
+             GROUP_COLUMN_MD,
+             TYPE_COLUMN_MD,
+             MEASUREMENT_COLUMN_MD,
+             UOM_COLUMN_MD]
         ])
 
         if st.button("Confirm Remove"):

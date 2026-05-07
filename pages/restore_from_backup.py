@@ -13,7 +13,13 @@ from services.restore_backup import (
 from config import (
     SK_BACKUP_DATA,
     SK_MAIN_DATA,
-    TB_MASTER_DATA
+    TB_MASTER_DATA,
+    # Column Names
+    CATEGORY_COLUMN_MD,
+    GROUP_COLUMN_MD,
+    TYPE_COLUMN_MD,
+    MEASUREMENT_COLUMN_MD,
+    UOM_COLUMN_MD
 )
 
 def render_restore_page():
@@ -40,7 +46,7 @@ def render_restore_page():
         st.subheader("Preview Backup Data")
 
         st.dataframe(backup_df[
-            ["category", "group", "type", "measurement", "uom"]
+            [CATEGORY_COLUMN_MD, GROUP_COLUMN_MD, TYPE_COLUMN_MD, MEASUREMENT_COLUMN_MD, UOM_COLUMN_MD]
         ])
 
         # Restore section

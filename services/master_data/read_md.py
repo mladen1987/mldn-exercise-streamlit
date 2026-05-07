@@ -7,7 +7,15 @@ from services.google_sheets import get_sheet
 from utils.data_type_helpers import ensure_list
 
 # Variables
-from config import SK_MAIN_DATA, TB_MASTER_DATA
+from config import (
+    SK_MAIN_DATA,
+    TB_MASTER_DATA,
+    # Column Names
+    CATEGORY_COLUMN_MD,
+    GROUP_COLUMN_MD,
+    TYPE_COLUMN_MD,
+    MEASUREMENT_COLUMN_MD
+)
 
 # ===== READ MASTER DATA =====
 def get_master_data():
@@ -24,7 +32,7 @@ def get_unique_categories(df):
         return []
 
     categories = (
-        df["category"]
+        df[CATEGORY_COLUMN_MD]
         .dropna()
         .astype(str)
         .str.strip()
@@ -39,7 +47,7 @@ def get_unique_groups(df, category):
 
     if category:
         groups = (
-            df[df["category"].isin(category)]["group"]
+            df[df[CATEGORY_COLUMN_MD].isin(category)][GROUP_COLUMN_MD]
             .dropna()
             .astype(str)
             .str.strip()
@@ -61,9 +69,9 @@ def get_unique_types(df, category, group):
     if category and group:
         types = (
             df[
-                (df["category"].isin(category))
-                & (df["group"].isin(group))
-            ]["type"]
+                (df[CATEGORY_COLUMN_MD].isin(category))
+                & (df[GROUP_COLUMN_MD].isin(group))
+            ][TYPE_COLUMN_MD]
             .dropna()
             .astype(str)
             .str.strip()
@@ -86,10 +94,10 @@ def get_unique_measurements(df, category, group, type_):
     if category and group and type_:
         measurements = (
             df[
-                (df["category"].isin(category))
-                & (df["group"].isin(group))
-                & (df["type"].isin(type_))
-            ]["measurement"]
+                (df[CATEGORY_COLUMN_MD].isin(category))
+                & (df[GROUP_COLUMN_MD].isin(group))
+                & (df[TYPE_COLUMN_MD].isin(type_))
+            ][MEASUREMENT_COLUMN_MD]
             .dropna()
             .astype(str)
             .str.strip()
