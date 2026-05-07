@@ -11,6 +11,8 @@ from pages.master_data_remove import render_master_data_remove_page
 from pages.restore_from_backup import render_restore_page
 from pages.gym_session_add import render_gym_session_page
 
+from config import CATEGORY_GYM
+
 # ===============
 # GET DATA
 # ===============
@@ -23,7 +25,7 @@ tab_input, tab_remove, tab_restore, tab_gym_session = st.tabs([
     "➕ Add Exercise Type",
     "🗑️ Remove Exercise Type",
     "🔄 Restore from Backup",
-    "🏋️ Add Gym Session"
+    f"🏋️ Add {CATEGORY_GYM} Session"
 ])
 
 # ===============
@@ -58,6 +60,6 @@ with tab_restore:
 # ===============
 with tab_gym_session:
 
-    st.title("Add Gym Session")
+    st.title(f"🏋️ Add {CATEGORY_GYM} Session")
 
     render_gym_session_page(master_data_df)
