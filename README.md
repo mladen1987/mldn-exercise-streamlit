@@ -2,68 +2,96 @@
 
 ## 📊 Overview
 
-This is a simple learning project built with Streamlit to explore Python app development.
+This is a learning project built with Streamlit to explore Python app development, state-driven UI design, and Google Sheets integration.
 
-The app connects to Google Sheets and allows managing exercise master data for tracking and visualization.
+The app uses Google Sheets as a lightweight database and allows managing exercise master data and logging workout sessions.
 
 ---
 
 ## 🚀 Version
 
-**v0.3.0 - Master Data Management (CRUD + Backup & Restore)**
+**v0.4.0 - Exercise Session State Machine + Modular UI Refactor**
 
 ---
 
 ## ✨ Current Features
 
-- 🔗 Connects to Google Sheets as a data source  
-- 📥 Reads data from a live spreadsheet  
+### 🔗 Data Layer
+- Connects to Google Sheets as primary data source
+- Reads and writes structured exercise and master data
+- Service-layer abstraction for all Google Sheets interactions
 
-- 🧩 Master data input system:
-  - Category → Group → Type → Measurement hierarchy  
-  - Ability to add new values inline  
-  - Multiple measurements per entry  
-  - Writes updates back to Google Sheets  
+---
 
-- 🗑️ Master data removal system:
-  - Filter by category → group → type → measurement  
-  - Supports partial and multi-select filtering  
-  - Preview rows before deletion  
-  - Safe delete with automatic backup  
+### 🧩 Master Data Management (CRUD)
+- Category → Group → Type → Measurement hierarchy
+- Add new exercise structures inline
+- Remove entries with safe preview before deletion
+- Writes updates back to Google Sheets
 
-- 💾 Backup system:
-  - Backups stored in a separate Google Sheet  
-  - Timestamped backup versions  
-  - Automatic cleanup (keeps latest 5 backups)  
+---
 
-- ♻️ Restore system:
-  - View available backups with timestamps  
-  - Preview backup data before restoring  
-  - Restore full master data from selected backup  
-  - Automatic backup before restore (safety layer)  
+### 🏋️ Exercise Session Tracker (NEW)
+
+State-driven workout logging system:
+- Select exercise category and group
+- Recommended workout group based on historical data
+- Dynamic rendering of exercise types
+- Expandable measurement inputs per exercise type
+- Session preview before submission
+- Google Sheets write-back per session
+
+---
+
+### 💾 Backup System
+- Timestamped backups stored in separate Google Sheet
+- Automatic retention (keeps latest 5 backups)
+- Safe restore mechanism with preview
 
 ---
 
 ## 🧪 Tech Stack
 
-- Streamlit  
-- Python  
-- Google Sheets API (via gspread)  
-- Google Cloud service account authentication  
+- Streamlit
+- Python
+- Google Sheets API (gspread)
+- Google Cloud Service Account Authentication
+- Pandas
 
 ---
 
-## 🚀 Current Status / Roadmap
+## ⚠️ Known Issues / Technical Notes
 
-- [x] Project setup  
-- [x] Google Sheets connection  
-- [x] Master data read + write flow  
-- [x] Dynamic input system (category/group/type/measurements)  
-- [x] Delete existing master data entries (with backup)  
-- [x] Backup management (limit + cleanup)  
-- [x] Restore from backup  
-- [ ] Improve UI/UX (searchable dropdowns, validation)  
-- [ ] Add data visualization module  
+### Google Sheets API Quota Limitation
+
+Occasionally the app may hit:
+
+> **Error 429: Quota exceeded for quota metric 'Read requests'**
+
+This happens when:
+- Too many reads are triggered in short succession
+- Streamlit reruns cause repeated sheet reads
+
+#### Recommended fixes (future improvements):
+
+- Add caching layer (`st.cache_data`)
+- Reduce repeated calls to `get_master_data()`
+- Batch Google Sheets reads where possible
+- Introduce lightweight local session caching in `st.session_state`
+
+---
+
+## 🚀 Roadmap
+
+- [x] Project setup
+- [x] Google Sheets integration
+- [x] Master data CRUD system
+- [x] Backup + restore system
+- [x] Exercise session logging (state machine UI)
+- [ ] Add caching layer to reduce API calls (fix 429 errors)
+- [ ] Improve UI UX (searchable dropdowns, keyboard flow)
+- [ ] Add analytics dashboard (progress tracking)
+- [ ] Add per-exercise progression charts
 
 ---
 
