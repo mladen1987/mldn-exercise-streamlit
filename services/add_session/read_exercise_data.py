@@ -85,6 +85,9 @@ def get_recommended_group(latest_dates_df, master_data_df, category_value):
         .fillna(pd.Timestamp("1900-01-01"))
     )
     
+    if latest_dates_per_group.empty:
+        return None
+    
     # Oldest latest workout
     recommended_group = (
         latest_dates_per_group
