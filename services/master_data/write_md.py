@@ -9,28 +9,39 @@ from services.google_sheets import (
 from utils.data_type_helpers import ensure_list
 
 # Variables
-from config import SK_MAIN_DATA, TB_MASTER_DATA
+from config import (
+    SK_MAIN_DATA,
+    TB_MASTER_DATA,
+    # Column Names
+    CATEGORY_COLUMN_MD,
+    GROUP_COLUMN_MD,
+    TYPE_COLUMN_MD,
+    MEASUREMENT_COLUMN_MD,
+    UOM_COLUMN_MD,
+    EXERCISE_KEY_COLUMN_MD,
+    EXERCISE_MEASUREMENT_KEY_COLUMN_MD
+)
 
 def build_new_master_data_rows(category, group, type_, measurements):
     new_rows = []
 
-    base_key = f"{category}_{group}_{type_}".lower().replace(" ", "_")
+    base_key = f"{category}_{group}_{type_}".lower().replace(" ", "-")
 
     for m in measurements:
-        if m.get("measurement") and m.get("uom"):
-            measurement = m["measurement"]
-            uom = m["uom"]
+        if m.get(MEASUREMENT_COLUMN_MD) and m.get(UOM_COLUMN_MD):
+            measurement = m[MEASUREMENT_COLUMN_MD]
+            uom = m[UOM_COLUMN_MD]
 
             new_rows.append({
-                "category": category,
-                "group": group,
-                "type": type_,
-                "measurement": measurement,
-                "uom": uom,
-                "exercise_key": base_key,
-                "exercise_measurement_key": f"{base_key}_{measurement}_{uom}"
+                CATEGORY_COLUMN_MD: category,
+                GROUP_COLUMN_MD: group,
+                TYPE_COLUMN_MD: type_,
+                MEASUREMENT_COLUMN_MD: measurement,
+                UOM_COLUMN_MD: uom,
+                EXERCISE_KEY_COLUMN_MD: base_key,
+                EXERCISE_MEASUREMENT_KEY_COLUMN_MD: f"{base_key}_{measurement}_{uom}"
                     .lower()
-                    .replace(" ", "_")
+                    .replace(" ", "-")
             })
 
     return new_rows
@@ -64,16 +75,16 @@ def rows_to_remove(df, category, group, type_, measurements):
 
     # Apply filters only if values exist
     if category:
-        filtered_df = filtered_df[filtered_df["category"].isin(category)]
+        filtered_df = filtered_df[filtered_df[CATEGORY_COLUMN_MD].isin(category)]
 
     if group:
-        filtered_df = filtered_df[filtered_df["group"].isin(group)]
+        filtered_df = filtered_df[filtered_df[GROUP_COLUMN_MD].isin(group)]
 
     if type_:
-        filtered_df = filtered_df[filtered_df["type"].isin(type_)]
+        filtered_df = filtered_df[filtered_df[TYPE_COLUMN_MD].isin(type_)]
 
     if measurements:
-        filtered_df = filtered_df[filtered_df["measurement"].isin(measurements)]
+        filtered_df = filtered_df[filtered_df[MEASUREMENT_COLUMN_MD].isin(measurements)]
 
     return filtered_df
 
