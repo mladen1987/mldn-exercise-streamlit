@@ -10,6 +10,11 @@ from services.add_session.read_exercise_data import (
     get_recommended_group
 )
 
+from services.add_session.read_session_data import (
+    get_types_for_group,
+    group_measurements_by_type
+)
+
 def render_exercise_session_page(master_data_df, exercise_data_df):
 
     # ===== Select Category =====
@@ -61,3 +66,33 @@ def render_exercise_session_page(master_data_df, exercise_data_df):
 
             if st.button(label):
                 st.session_state["selected_exercise_group"] = group
+
+    # ===== Display Exercise Types for Selected Group =====
+    if st.session_state.get("selected_exercise_group"):
+
+        types = get_types_for_group(
+            master_data_df,
+            selected_category,
+            st.session_state["selected_exercise_group"]
+        )
+
+        # ===== Group Measurements by Type =====
+        # Display all measurements for each type together under an expander
+        grouped_types = group_measurements_by_type(types)
+
+        for type_name, measurements in grouped_types.items():
+
+            with st.expander(type_name):
+            
+                for measurement in measurements:
+
+                    label = (
+                        f"{measurement['measurement']} "
+                        f"({measurement['uom']})"
+                    )
+
+                    st.number_input(
+                        label,
+                        key=measurement["exercise_measurement_key"],
+                        placeholder="Enter value",
+                    )
