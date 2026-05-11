@@ -2,6 +2,8 @@ import streamlit as st
 
 from services.google_sheets import get_client
 
+from services.data_layer.read_tabs import get_master_df
+
 from services.master_data.backup_md import backup_master_data_to_sheet
 
 from services.master_data.read_md import (
@@ -112,6 +114,8 @@ def render_master_data_remove_page(master_data_df):
             updated_master_data_df = remove_master_data_rows(df_rows_to_remove, master_data_df)
             
             master_data_export(updated_master_data_df)
+
+            get_master_df.clear()
 
             st.success(f"✅ Successfully removed {len(df_rows_to_remove)} exercise types and measurements!")
             st.info(f"📁 Backup of original Master Data saved to sheet: {backup_name}")

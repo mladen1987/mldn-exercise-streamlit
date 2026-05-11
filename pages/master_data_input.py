@@ -1,5 +1,7 @@
 import streamlit as st
 
+from services.data_layer.read_tabs import get_master_df
+
 from services.master_data.read_md import (
     get_unique_categories,
     get_unique_groups,
@@ -80,5 +82,7 @@ def render_master_data_input_page(master_data_df):
             master_data_df = append_new_master_data_rows(new_rows, master_data_df)
 
             master_data_export(master_data_df)
+            
+            get_master_df.clear()
 
             st.success(f"✅ Successfully added {len(new_rows)} exercise types and measurements!")
