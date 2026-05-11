@@ -32,7 +32,7 @@ def list_backups(client, backup_sheet_key):
         for title, dt in backup_items
     }
 
-st.cache_data(ttl=300)
+@st.cache_data(ttl=1800)
 def get_backup_data(tab_name, backup_sheet_key):
     
     # Load Master Data from Google Sheets

@@ -1,36 +1,15 @@
 # Libraries
 import pandas as pd
-import streamlit as st
-
-# Functions
-from services.google_sheets import get_sheet
 
 from utils.data_type_helpers import ensure_list
 
 # Variables
 from config import (
-    SK_MAIN_DATA,
-    TB_MASTER_DATA,
-    # Column Names
     CATEGORY_COLUMN_MD,
     GROUP_COLUMN_MD,
     TYPE_COLUMN_MD,
     MEASUREMENT_COLUMN_MD
 )
-
-# ===== READ MASTER DATA =====
-@st.cache_data(ttl=300)
-def get_master_data():
-    # Load Master Data from Google Sheets
-    sheet = get_sheet(SK_MAIN_DATA, TB_MASTER_DATA)
-    
-    values = sheet.get_all_values()
-    headers = values[0]
-    rows = values[1:]
-
-    df = pd.DataFrame(rows, columns=headers)
-
-    return df
 
 def get_unique_categories(df):
     if df.empty:
