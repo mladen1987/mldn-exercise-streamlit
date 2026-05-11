@@ -1,4 +1,5 @@
 import pandas as pd
+import streamlit as st
 
 from services.google_sheets import get_sheet
 from services.master_data.read_md import get_master_data
@@ -17,14 +18,16 @@ from config import (
     CATEGORY_COLUMN_MD
 )
 
-
+st.cache_data(ttl=300)
 def get_exercise_data():
 
     sheet = get_sheet(SK_MAIN_DATA, TB_MAIN_DATA)
 
-    data = sheet.get_all_records()
-
-    return pd.DataFrame(data)
+    values = sheet.get_all_values()
+    headers = values[0]
+    rows = values[1:]
+    
+    return pd.DataFrame(rows, columns=headers)
 
 
 def get_latest_exercise_dates(exercise_data_df):

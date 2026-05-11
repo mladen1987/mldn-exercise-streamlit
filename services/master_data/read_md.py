@@ -1,5 +1,6 @@
 # Libraries
 import pandas as pd
+import streamlit as st
 
 # Functions
 from services.google_sheets import get_sheet
@@ -18,12 +19,16 @@ from config import (
 )
 
 # ===== READ MASTER DATA =====
+@st.cache_data(ttl=300)
 def get_master_data():
     # Load Master Data from Google Sheets
     sheet = get_sheet(SK_MAIN_DATA, TB_MASTER_DATA)
-    data = sheet.get_all_records()
+    
+    values = sheet.get_all_values()
+    headers = values[0]
+    rows = values[1:]
 
-    df = pd.DataFrame(data)
+    df = pd.DataFrame(rows, columns=headers)
 
     return df
 

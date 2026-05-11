@@ -19,7 +19,6 @@ def get_client(secrets_path=SECRETS_PATH):
     return client
 
 # ===== GET SHEET =====
-@st.cache_resource
 def get_sheet(sheet_key, tab_name):
     client = get_client()
     return client.open_by_key(sheet_key).worksheet(tab_name)
