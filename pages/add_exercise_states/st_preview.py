@@ -1,7 +1,10 @@
-from services.data_layer.read_tabs import get_exercise_df
 import streamlit as st
 import pandas as pd
 
+from services.data_layer.read_tabs import (
+    get_exercise_df,
+    get_all_tabs_raw
+)
 from services.add_session.write_session_data import build_session_preview_df
 from services.add_session.write_exercise_data import write_session_to_sheet
 
@@ -33,8 +36,9 @@ def render_state_preview():
                 # Write session data to Google Sheet
                 write_session_to_sheet(SK_MAIN_DATA, TB_MAIN_DATA, pd.DataFrame(session_rows))
                 
-                # 🔥 invalidate cached data
+                # 🔥 invalidate cached data               
                 get_exercise_df.clear()
+                get_all_tabs_raw.clear()
                 
                 # ===== MAIN STATE DEFINE - WRITE SUCCESS =====
                 st.session_state["main_state"] = "write_success"
