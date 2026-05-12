@@ -2,15 +2,15 @@
 
 ## 📊 Overview
 
-This is a learning project built with Streamlit to explore Python app development, state-driven UI design, modular architecture, and Google Sheets integration.
+A Streamlit-based learning project exploring state-driven UI design, modular Python architecture, and Google Sheets as a lightweight database.
 
-The app uses Google Sheets as a lightweight database and allows managing exercise master data and logging workout sessions.
+The app manages exercise master data and logs workout sessions with a structured, scalable workflow.
 
 ---
 
 ## 🚀 Version
 
-**v0.5.0 - Data Layer Caching + API Optimization Refactor**
+**v0.5.1 - Data Layer Caching + API Optimization Refactor**
 
 ---
 
@@ -18,41 +18,28 @@ The app uses Google Sheets as a lightweight database and allows managing exercis
 
 ### 🔗 Google Sheets Data Layer
 - Google Sheets used as lightweight database
-- Centralized read/write service architecture
-- Cached data access with automatic invalidation
-- Optimized to minimize API quota usage
+- Centralized read/write service layer
+- Cached reads with automatic invalidation
+- Optimized to reduce API quota usage
 
 ---
 
-### 🧩 Master Data Management
-- Category → Group → Type → Measurement hierarchy
-- Inline creation of new exercise structures
-- Safe delete workflow with preview + backup
-- Restore previous master data versions from backups
+### 🧩 Master Data Management (Unified Module)
+- Single consolidated master data interface (input, remove, restore)
+- Creation and deletion of exercise definitions
+- Safe workflow with previews + backups
+- Restore from timestamped backups
+- State-driven UI
 
 ---
 
 ### 🏋️ Exercise Session Tracking
-- State-driven workout logging flow
-- Recommended workout groups based on history
-- Dynamic exercise + measurement rendering
-- Session preview before submission
-- Google Sheets write-back with success-state handling
 
----
-
-### 💾 Backup & Recovery
-- Automatic timestamped backups
-- Retention cleanup (latest 5 backups kept)
-- Restore preview + overwrite protection
-
----
-
-### 💾 Backup System
-
-- Timestamped backups stored in separate Google Sheet
-- Automatic retention (keeps latest 5 backups)
-- Safe restore mechanism with preview
+- Recommended workout suggestions based on history
+- Dynamic exercise and measurement input
+- Safe workflow with preview and checks before submission
+- Google Sheets write-back
+- State-driven UI
 
 ---
 
@@ -62,7 +49,7 @@ The app uses Google Sheets as a lightweight database and allows managing exercis
 - Python
 - Pandas
 - Google Sheets API (`gspread`)
-- Google Cloud Service Account Authentication
+- Google Cloud Service Account Auth
 
 ---
 
@@ -72,14 +59,15 @@ The app uses Google Sheets as a lightweight database and allows managing exercis
 - [x] Google Sheets integration
 - [x] Master data CRUD system
 - [x] Backup + restore system
-- [x] Exercise session logging (state machine UI)
-- [x] Modular page/state architecture
-- [x] Shared cached data layer
-- [x] API optimization + cache invalidation system
-- [ ] Improve UI/UX
-- [ ] Add per-exercise progression charts
-- [ ] Add analytics
-- [ ] Add authentication / multi-user support
+- [x] Session tracking (state machine UI)
+- [x] Modular architecture (pages + states)
+- [x] Cached data layer + API optimization
+- [x] Unified master data module (input / remove / restore)
+- [ ] UI/UX improvements
+- [ ] Progression tracking charts
+- [ ] Analytics dashboard - Landing Page
+- [ ] Authentication
+- [ ] Deployment
 
 ---
 
