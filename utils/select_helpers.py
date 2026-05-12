@@ -30,6 +30,7 @@ def select_or_all(
     label,
     options,
     all_label="✅ Select All",
+    key=None
 ):
     """
     Multi-select with 'Select All' option.
@@ -40,7 +41,8 @@ def select_or_all(
 
     selection = st.multiselect(
         label,
-        options_with_all
+        options_with_all,
+        key=key
     )
 
     # If user selects "Select All"

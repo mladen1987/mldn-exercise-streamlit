@@ -22,7 +22,7 @@ from config import (
     UOM_COLUMN_MD
 )
 
-def render_restore_page():
+def render_master_data_restore_from_backup_state():
     backups = list_backups(get_client(), SK_BACKUP_DATA)
 
     selected_backup = st.selectbox(
