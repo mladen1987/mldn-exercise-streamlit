@@ -1,31 +1,15 @@
 # Libraries
 import pandas as pd
 
-# Functions
-from services.google_sheets import get_sheet
-
 from utils.data_type_helpers import ensure_list
 
 # Variables
 from config import (
-    SK_MAIN_DATA,
-    TB_MASTER_DATA,
-    # Column Names
     CATEGORY_COLUMN_MD,
     GROUP_COLUMN_MD,
     TYPE_COLUMN_MD,
     MEASUREMENT_COLUMN_MD
 )
-
-# ===== READ MASTER DATA =====
-def get_master_data():
-    # Load Master Data from Google Sheets
-    sheet = get_sheet(SK_MAIN_DATA, TB_MASTER_DATA)
-    data = sheet.get_all_records()
-
-    df = pd.DataFrame(data)
-
-    return df
 
 def get_unique_categories(df):
     if df.empty:

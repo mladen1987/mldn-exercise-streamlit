@@ -1,4 +1,5 @@
 import pandas as pd
+import streamlit as st
 
 from datetime import datetime
 
@@ -31,12 +32,16 @@ def list_backups(client, backup_sheet_key):
         for title, dt in backup_items
     }
 
+@st.cache_data(ttl=1800)
 def get_backup_data(tab_name, backup_sheet_key):
     
     # Load Master Data from Google Sheets
     sheet = get_sheet(backup_sheet_key, tab_name)
-    data = sheet.get_all_records()
+    
+    values = sheet.get_all_values()
+    headers = values[0]
+    rows = values[1:]
 
-    df = pd.DataFrame(data)
+    df = pd.DataFrame(rows, columns=headers)
 
     return df

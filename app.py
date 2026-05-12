@@ -2,8 +2,10 @@
 import streamlit as st
 
 # Modules
-from services.master_data.read_md import get_master_data
-from services.add_session.read_exercise_data import get_exercise_data
+from services.data_layer.read_tabs import (
+    get_master_df,
+    get_exercise_df
+)
 
 from pages.master_data_input import render_master_data_input_page
 from pages.master_data_remove import render_master_data_remove_page
@@ -13,8 +15,8 @@ from pages.add_exercise_session import render_exercise_session_page
 # ===============
 # GET DATA
 # ===============
-master_data_df = get_master_data()
-exercise_data_df = get_exercise_data()
+master_data_df = get_master_df()
+exercise_data_df = get_exercise_df()
 
 # ===============
 # TABS

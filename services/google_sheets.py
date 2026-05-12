@@ -1,11 +1,12 @@
 # Libraries
 import gspread
+import streamlit as st
 from google.oauth2.service_account import Credentials
 
 # Variables
 from config import SECRETS_PATH, SCOPES
-
 # ===== GOOGLE SHEETS API =====
+@st.cache_resource
 def get_client(secrets_path=SECRETS_PATH):
     scope = SCOPES
 

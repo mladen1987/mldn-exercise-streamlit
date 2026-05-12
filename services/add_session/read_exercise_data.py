@@ -1,12 +1,6 @@
 import pandas as pd
 
-from services.google_sheets import get_sheet
-from services.master_data.read_md import get_master_data
-
 from config import (
-    SK_MAIN_DATA,
-    TB_MAIN_DATA,
-
     # Exercise Data columns
     EXERCISE_KEY_COLUMN,
     DATE_COLUMN,
@@ -16,16 +10,6 @@ from config import (
     GROUP_COLUMN_MD,
     CATEGORY_COLUMN_MD
 )
-
-
-def get_exercise_data():
-
-    sheet = get_sheet(SK_MAIN_DATA, TB_MAIN_DATA)
-
-    data = sheet.get_all_records()
-
-    return pd.DataFrame(data)
-
 
 def get_latest_exercise_dates(exercise_data_df):
 
