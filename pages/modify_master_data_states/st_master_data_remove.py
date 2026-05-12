@@ -35,14 +35,14 @@ from config import (
 )
 
 
-def render_master_data_remove_page(master_data_df):
+def render_master_data_remove_state(master_data_df):
 
-    # ===== MD_RMV_MAIN_STATE DEFINE - SELECT AND REMOVE STATE =====
-    if "md_rmv_main_state" not in st.session_state:
-        st.session_state["md_rmv_main_state"] = "select_and_remove"
+    # ===== MD_MAIN_STATE DEFINE - SELECT AND REMOVE STATE =====
+    if "md_main_state" not in st.session_state:
+        st.session_state["md_main_state"] = "rmvst_select_and_remove"
 
     # ==== 1. SELECT AND REMOVE STATE =====
-    if st.session_state["md_rmv_main_state"] == "select_and_remove":
+    if st.session_state["md_main_state"] == "rmvst_select_and_remove":
     
         # ===== Select Category =====
         categories = get_unique_categories(master_data_df)
@@ -133,11 +133,11 @@ def render_master_data_remove_page(master_data_df):
                 st.session_state["removed_rows_count"] = len(df_rows_to_remove)
                 st.session_state["backup_name"] = backup_name
 
-                # ===== MD_RMV_MAIN_STATE DEFINE - SUCCESS STATE =====
-                st.session_state["md_rmv_main_state"] = "success_state"
+                # ===== MD_MAIN_STATE DEFINE - SUCCESS STATE =====
+                st.session_state["md_main_state"] = "rmvst_success_state"
 
     # ===== 2. SUCCESS STATE =====
-    if st.session_state["md_rmv_main_state"] == "success_state":
+    if st.session_state["md_main_state"] == "rmvst_success_state":
 
         rows_removed = st.session_state.get("removed_rows_count", 0)
         backup_name = st.session_state.get("backup_name", "Unknown")
@@ -152,7 +152,7 @@ def render_master_data_remove_page(master_data_df):
 
         if st.button("Remove More Master Data"):
 
-            st.session_state["md_rmv_main_state"] = "select_and_remove"
+            st.session_state["md_main_state"] = "rmvst_select_and_remove"
             st.session_state["removed_rows_count"] = None
             st.session_state["backup_name"] = None
             

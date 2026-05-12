@@ -22,14 +22,14 @@ from utils.input_helpers import (
     input_block_measurements,
 )
 
-def render_master_data_input_page(master_data_df):
+def render_master_data_input_state(master_data_df):
 
     # ===== MD_MAIN_STATE DEFINE - INPUT STATE =====
     if "md_main_state" not in st.session_state:
-        st.session_state["md_main_state"] = "input_state"
+        st.session_state["md_main_state"] = "inpst_input"
 
     # ==== 1. INPUT STATE =====
-    if st.session_state["md_main_state"] == "input_state":
+    if st.session_state["md_main_state"] == "inpst_input":
         
         # ===== Select Category =====
         categories = get_unique_categories(master_data_df)
@@ -97,12 +97,12 @@ def render_master_data_input_page(master_data_df):
                 st.session_state["md_rows_added"] = len(new_rows)
 
                 # ===== MD_MAIN_STATE DEFINE - SUCCESS STATE =====
-                st.session_state["md_main_state"] = "success_state"
+                st.session_state["md_main_state"] = "inpst_success"
 
                 st.rerun()
 
     # ==== 2. SUCCESS STATE =====
-    if st.session_state["md_main_state"] == "success_state":
+    if st.session_state["md_main_state"] == "inpst_success":
 
         rows_added = st.session_state.get("md_rows_added", 0)
 
@@ -113,7 +113,7 @@ def render_master_data_input_page(master_data_df):
         if st.button("Add More Master Data"):
             
             # ===== MD_MAIN_STATE DEFINE - INPUT STATE =====
-            st.session_state["md_main_state"] = "input_state"
+            st.session_state["md_main_state"] = "inpst_input"
             st.session_state["md_rows_added"] = None
 
             st.rerun()
