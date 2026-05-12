@@ -16,23 +16,23 @@ def render_master_data_page(master_data_df):
 
         with col1:
             # ===== MD MAIN STATE SET - INPUT STATE - INPUT =====
-            st.markdown("#### ➕ Input")
-            if st.button("Open", use_container_width=True):
+            st.markdown("#### ➕ Create")
+            if st.button("Add Exercise Types", use_container_width=True):
                 st.session_state["md_main_state"] = "inpst_input"
                 st.rerun()
                 st.rerun()
 
         with col2:
             # ===== MD MAIN STATE SET - REMOVE STATE - SELECT AND REMOVE =====
-            st.markdown("#### 🗑 Remove")
-            if st.button("Remove", use_container_width=True):
+            st.markdown("#### 🗑 Delete")
+            if st.button("Remove Exercise Types", use_container_width=True):
                 st.session_state["md_main_state"] = "rmvst_select_and_remove"
                 st.rerun()
 
         with col3:
             # ===== MD MAIN STATE SET - RESTORE FROM BACKUP STATE =====
-            st.markdown("#### ♻️ Restore")
-            if st.button("Restore", use_container_width=True):
+            st.markdown("#### ♻️ Recover")
+            if st.button("Restore Older Version", use_container_width=True):
                 st.session_state["md_main_state"] = "bckp_state"
                 st.rerun()
 

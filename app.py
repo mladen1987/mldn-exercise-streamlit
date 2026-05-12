@@ -38,7 +38,7 @@ with tab_exercise_session:
 # ===============
 with tab_master_data:
 
-    st.title("Modify Master Data")
+    st.title("Master Data Manager")
 
     render_master_data_page(master_data_df)
 
