@@ -9,6 +9,14 @@ from services.data_layer.read_tabs import (
 
 from pages.modify_master_data import render_master_data_page
 from pages.add_exercise_session import render_exercise_session_page
+from pages.login_screen import render_login_page
+
+# =========================
+# AUTH GATE
+# =========================
+if not st.session_state.get("authenticated"):
+    render_login_page()
+    st.stop()
 
 # ===============
 # GET DATA
