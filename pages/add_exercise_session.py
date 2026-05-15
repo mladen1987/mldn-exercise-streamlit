@@ -29,7 +29,7 @@ def render_exercise_session_page(master_data_df, exercise_data_df):
     # ==== 2. EXERCISE DATA INPUT STATE =====
     if st.session_state.get("main_state") == "exercise_data_input":
 
-        render_state_exercise_data_input(master_data_df)
+        render_state_exercise_data_input(master_data_df, exercise_data_df)
 
     
     # ==== 3. PREVIEW OUTPUT STATE =====
