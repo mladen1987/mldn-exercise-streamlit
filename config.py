@@ -1,5 +1,4 @@
 # ===== Google Sheets =====
-SECRETS_PATH = "secrets/secrets.json"
 SCOPES = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive"
