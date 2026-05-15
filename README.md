@@ -10,7 +10,7 @@ The app manages exercise master data and logs workout sessions with a structured
 
 ## 🚀 Version
 
-**v0.5.1 - Data Layer Caching + API Optimization Refactor**
+**v0.5.2 - Session History Visualization (Spark Bars + Date Timeline)**
 
 ---
 
@@ -37,6 +37,10 @@ The app manages exercise master data and logs workout sessions with a structured
 
 - Recommended workout suggestions based on history
 - Dynamic exercise and measurement input
+- **Session history preview with spark-style trend visualization**
+  - Last 5 sessions per measurement
+  - Date-based timeline display
+  - Inline spark bars for quick trend interpretation
 - Safe workflow with preview and checks before submission
 - Google Sheets write-back
 - State-driven UI
@@ -63,8 +67,8 @@ The app manages exercise master data and logs workout sessions with a structured
 - [x] Modular architecture (pages + states)
 - [x] Cached data layer + API optimization
 - [x] Unified master data module (input / remove / restore)
-- [ ] UI/UX improvements
-- [ ] Progression tracking charts
+- [x] Session history visualization (spark bars + date view)
+- [x] UI/UX improvements
 - [ ] Analytics dashboard - Landing Page
 - [ ] Authentication
 - [ ] Deployment
