@@ -93,7 +93,13 @@ def get_recent_measurement_history(
     )
 
     if history_df.empty:
-        return pd.DataFrame()
+        return pd.DataFrame(columns=[
+            TYPE_COLUMN_MD,
+            MEASUREMENT_COLUMN_MD,
+            UOM_COLUMN_MD,
+            DATE_COLUMN,
+            "value"
+        ])
 
     # ===== Convert date =====
     history_df[DATE_COLUMN] = pd.to_datetime(
