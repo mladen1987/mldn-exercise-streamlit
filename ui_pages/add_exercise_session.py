@@ -1,9 +1,9 @@
 import pandas as pd
 import streamlit as st
 
-from pages.add_exercise_states.st_select_exercise import render_state_select_exercise
-from pages.add_exercise_states.st_exercise_data_input import render_state_exercise_data_input
-from pages.add_exercise_states.st_preview import render_state_preview
+from ui_pages.add_exercise_states.st_select_exercise import render_state_select_exercise
+from ui_pages.add_exercise_states.st_exercise_data_input import render_state_exercise_data_input
+from ui_pages.add_exercise_states.st_preview import render_state_preview
 
 from config import SK_MAIN_DATA, TB_MAIN_DATA
 
