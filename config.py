@@ -31,3 +31,7 @@ MEASUREMENT_COLUMN_MD = "measurement"
 UOM_COLUMN_MD = "uom"
 EXERCISE_KEY_COLUMN_MD = "exercise_key"
 EXERCISE_MEASUREMENT_KEY_COLUMN_MD = "exercise_measurement_key"
+
+# ===== APP LOGIC =====
+MAX_ATTEMPTS = 3
+LOCKOUT_SECONDS = 30

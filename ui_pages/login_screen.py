@@ -1,5 +1,5 @@
 import streamlit as st
-from services.authenticate import check_password, login_success
+from services.authenticate import handle_login
 
 
 def render_login_page():
@@ -12,14 +12,7 @@ def render_login_page():
 
     with col1:
         if st.button("Login"):
-            if check_password(password):
-                login_success()
-                st.success("Login successful")
-                st.rerun()
-            if not password:
-                st.warning("Please enter a password")
-            else:
-                st.error("Incorrect password")
+            handle_login(password)
 
     with col2:
         if st.button("Continue as Guest"):
