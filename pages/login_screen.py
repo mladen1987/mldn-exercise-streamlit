@@ -16,6 +16,8 @@ def render_login_page():
                 login_success()
                 st.success("Login successful")
                 st.rerun()
+            if not password:
+                st.warning("Please enter a password")
             else:
                 st.error("Incorrect password")
 

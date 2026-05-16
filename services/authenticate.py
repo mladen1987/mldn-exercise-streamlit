@@ -14,4 +14,4 @@ def login_success():
     st.session_state["authenticated"] = True
 
 def logout():
-    st.session_state["authenticated"] = False
+    st.session_state.clear()

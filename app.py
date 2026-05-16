@@ -2,6 +2,8 @@
 import streamlit as st
 
 # Modules
+from services.authenticate import logout
+
 from services.data_layer.read_tabs import (
     get_master_df,
     get_exercise_df
@@ -17,6 +19,17 @@ from pages.login_screen import render_login_page
 if not st.session_state.get("authenticated"):
     render_login_page()
     st.stop()
+
+# =========================
+# LOGOUT SIDEBAR
+# =========================
+with st.sidebar:
+
+    st.success("Authenticated")
+
+    if st.button("Logout"):
+        logout()
+        st.rerun()
 
 # ===============
 # GET DATA
