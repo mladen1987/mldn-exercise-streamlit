@@ -34,8 +34,26 @@ with st.sidebar:
 # ===============
 # GET DATA
 # ===============
-master_data_df = get_master_df()
-exercise_data_df = get_exercise_df()
+## For Guests, the app loads dummy csv files
+if st.session_state.get("guest_mode"):
+
+    from services.data_layer.read_dummy_data import (
+        get_dummy_master_df,
+        get_dummy_exercise_df
+    )
+
+    master_data_df = get_dummy_master_df()
+    exercise_data_df = get_dummy_exercise_df()
+
+else:
+## For the user loads Google Sheets
+    from services.data_layer.read_tabs import (
+        get_master_df,
+        get_exercise_df
+    )
+
+    master_data_df = get_master_df()
+    exercise_data_df = get_exercise_df()
 
 # ===============
 # TABS
