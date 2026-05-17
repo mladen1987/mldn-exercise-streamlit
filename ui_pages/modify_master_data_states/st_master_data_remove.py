@@ -142,6 +142,10 @@ def render_master_data_remove_state(master_data_df):
         rows_removed = st.session_state.get("removed_rows_count", 0)
         backup_name = st.session_state.get("backup_name", "Unknown")
 
+        # ===== GUEST MODE - EXTRA MESSAGE =====
+        if st.session_state.get("guest_mode", False): # Return false if guest_mode not defined
+            st.info("Guest mode enabled — session not saved.")
+
         st.success(
             f"✅ Successfully removed {rows_removed} rows!"
         )
@@ -149,7 +153,7 @@ def render_master_data_remove_state(master_data_df):
         st.info(
             f"📁 Backup saved to sheet: {backup_name}"
         )
-
+        
         if st.button("Remove More Master Data"):
 
             st.session_state["md_main_state"] = "rmvst_select_and_remove"

@@ -64,3 +64,7 @@ def render_master_data_restore_from_backup_state():
             )
 
             st.success("✅ Master Data restored from backup")
+            
+            # ===== GUEST MODE - EXTRA MESSAGE =====
+            if st.session_state.get("guest_mode", False): # Return false if guest_mode not defined
+                st.info("Guest mode enabled — session not saved.")

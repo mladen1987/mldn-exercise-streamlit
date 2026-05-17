@@ -46,6 +46,10 @@ def render_exercise_session_page(master_data_df, exercise_data_df):
 
         st.success("Session successfully written 🚀")
 
+        # ===== GUEST MODE - EXTRA MESSAGE =====
+        if st.session_state.get("guest_mode", False): # Return false if guest_mode not defined
+            st.info("Guest mode enabled — session not saved.")
+    
         if st.button("Add Another Session"):
             
             reset_exercise_flow()

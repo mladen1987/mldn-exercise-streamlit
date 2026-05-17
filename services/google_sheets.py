@@ -26,6 +26,12 @@ def get_sheet(sheet_key, tab_name):
 
 # ===== OVERWRITE SHEET =====
 def overwrite_sheet(headers, data, sheet_key, tab_name):
+
+    # ===== GUEST MODE GUARD =====
+    if st.session_state.get("guest_mode", False): # Returns false if guest_mode is not defined
+        st.info("Guest mode enabled — write to Google Sheets skipped.")
+        return
+
     sheet = get_sheet(sheet_key, tab_name)
     sheet.resize(rows=len(data) + 1)
     sheet.clear()
