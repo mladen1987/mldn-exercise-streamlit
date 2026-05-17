@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 from services.google_sheets import (
     get_client,
     overwrite_sheet
@@ -8,6 +9,11 @@ from services.google_sheets import (
 from services.restore_backup import (
     list_backups,
     get_backup_data
+)
+
+from services.restore_backup_guest import (
+    list_backups_guest_mode,
+    get_backup_data_guest
 )
 
 from config import (
@@ -23,7 +29,11 @@ from config import (
 )
 
 def render_master_data_restore_from_backup_state():
-    backups = list_backups(get_client(), SK_BACKUP_DATA)
+    
+    if st.session_state.get("guest_mode", False):
+        backups = list_backups_guest_mode()
+    else:
+        backups = list_backups(get_client(), SK_BACKUP_DATA)
 
     selected_backup = st.selectbox(
         "Select Master Data",
@@ -33,10 +43,12 @@ def render_master_data_restore_from_backup_state():
 
     # Load backup (button OR auto-load)
     if st.button("Show Backup Data"):
-        st.session_state["selected_backup_df"] = get_backup_data(
-            selected_backup,
-            SK_BACKUP_DATA
-        )
+        if st.session_state.get("guest_mode", False):
+            backup_df = get_backup_data_guest(selected_backup)
+        else:
+            backup_df = get_backup_data(selected_backup, SK_BACKUP_DATA)
+
+        st.session_state["selected_backup_df"] = backup_df
 
     # Display if loaded
     if "selected_backup_df" in st.session_state:
@@ -63,8 +75,8 @@ def render_master_data_restore_from_backup_state():
                 tab_name=TB_MASTER_DATA
             )
 
-            st.success("✅ Master Data restored from backup")
-            
             # ===== GUEST MODE - EXTRA MESSAGE =====
             if st.session_state.get("guest_mode", False): # Return false if guest_mode not defined
                 st.info("Guest mode enabled — session not saved.")
+
+            st.success("✅ Master Data restored from backup")
