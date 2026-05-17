@@ -1,0 +1,21 @@
+category,group,type,measurement,uom,exercise_key,exercise_measurement_key
+Gym,Push,Machine Chest Press,Weight,kg,gym_push_machine-chest-press,gym_push_machine-chest-press_weight_kg
+Gym,Push,Machine Chest Press,Reps,n,gym_push_machine-chest-press,gym_push_machine-chest-press_reps_n
+Gym,Push,Arnold Press,Weight,kg,gym_push_arnold-press,gym_push_arnold-press_weight_kg
+Gym,Push,Arnold Press,Reps,n,gym_push_arnold-press,gym_push_arnold-press_reps_n
+Gym,Pull,T-Bar Row,Weight,kg,gym_pull_t-bar-row,gym_pull_t-bar-row_weight_kg
+Gym,Pull,T-Bar Row,Reps,n,gym_pull_t-bar-row,gym_pull_t-bar-row_reps_n
+Gym,Pull,Lat Pulldown,Weight,kg,gym_pull_lat-pulldown,gym_pull_lat-pulldown_weight_kg
+Gym,Pull,Lat Pulldown,Reps,n,gym_pull_lat-pulldown,gym_pull_lat-pulldown_reps_n
+Gym,Legs,Bulgarian Split Squat,Weight,kg,gym_legs_bulgarian-split-squat,gym_legs_bulgarian-split-squat_weight_kg
+Gym,Legs,Bulgarian Split Squat,Reps,n,gym_legs_bulgarian-split-squat,gym_legs_bulgarian-split-squat_reps_n
+Gym,Legs,Leg Extension,Weight,kg,gym_legs_leg-extension,gym_legs_leg-extension_weight_kg
+Gym,Legs,Leg Extension,Reps,n,gym_legs_leg-extension,gym_legs_leg-extension_reps_n
+Running,Tempo,Tempo Run,Distance,km,running_tempo_tempo-run,running_tempo_tempo-run_distance_km
+Running,Tempo,Tempo Run,Pace,min/km,running_tempo_tempo-run,running_tempo_tempo-run_pace_min-km
+Running,Recovery,Easy Run,Distance,km,running_recovery_easy-run,running_recovery_easy-run_distance_km
+Running,Recovery,Easy Run,Heart Rate,bpm,running_recovery_easy-run,running_recovery_easy-run_heart-rate_bpm
+Cycling,Indoor,Zwift Session,Distance,km,cycling_indoor_zwift-session,cycling_indoor_zwift-session_distance_km
+Cycling,Indoor,Zwift Session,Power,w,cycling_indoor_zwift-session,cycling_indoor_zwift-session_power_w
+Cycling,Climb,Mountain Climb,Elevation,m,cycling_climb_mountain-climb,cycling_climb_mountain-climb_elevation_m
+Cycling,Climb,Mountain Climb,Distance,km,cycling_climb_mountain-climb,cycling_climb_mountain-climb_distance_km

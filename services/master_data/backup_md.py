@@ -1,3 +1,5 @@
+import streamlit as st
+
 from datetime import datetime
 
 from utils.data_source_helpers import extract_timestamp
@@ -26,6 +28,12 @@ def cleanup_old_backups(backup_spreadsheet, keep_last_n=5):
         backup_spreadsheet.del_worksheet(ws)
 
 def backup_master_data_to_sheet(client, backup_sheet_key, df, tab_name):
+    
+    # ===== GUEST MODE GUARD =====
+    if st.session_state.get("guest_mode", False):
+        st.info("Guest mode enabled — backup skipped.")
+        return None
+
     # Open backup spreadsheet
     backup_spreadsheet = client.open_by_key(backup_sheet_key)
 

@@ -30,6 +30,11 @@ def render_state_preview():
         # On Button Press
         if st.button("Submit Session Data"):
             try:
+                # ===== GUEST MODE =====
+                if st.session_state.get("guest_mode", False): # Return false if guest_mode not defined
+                      st.session_state["main_state"] = "write_success"
+                      st.rerun()
+                
                 # Write session data to Google Sheet
                 write_session_to_sheet(SK_MAIN_DATA, TB_MAIN_DATA, pd.DataFrame(session_rows))
                 

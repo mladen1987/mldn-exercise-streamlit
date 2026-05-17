@@ -1,5 +1,4 @@
 # ===== Google Sheets =====
-SECRETS_PATH = "secrets/secrets.json"
 SCOPES = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive"
@@ -32,3 +31,7 @@ MEASUREMENT_COLUMN_MD = "measurement"
 UOM_COLUMN_MD = "uom"
 EXERCISE_KEY_COLUMN_MD = "exercise_key"
 EXERCISE_MEASUREMENT_KEY_COLUMN_MD = "exercise_measurement_key"
+
+# ===== APP LOGIC =====
+MAX_ATTEMPTS = 3
+LOCKOUT_SECONDS = 30

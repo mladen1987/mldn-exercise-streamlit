@@ -110,6 +110,10 @@ def render_master_data_input_state(master_data_df):
             f"✅ Successfully added {rows_added} exercise types and measurements!"
         )
 
+        # ===== GUEST MODE - EXTRA MESSAGE =====
+        if st.session_state.get("guest_mode", False): # Return false if guest_mode not defined
+            st.info("Guest mode enabled — session not saved.")
+    
         if st.button("Add More Master Data"):
             
             # ===== MD_MAIN_STATE DEFINE - INPUT STATE =====

@@ -1,9 +1,9 @@
 import pandas as pd
 import streamlit as st
 
-from pages.add_exercise_states.st_select_exercise import render_state_select_exercise
-from pages.add_exercise_states.st_exercise_data_input import render_state_exercise_data_input
-from pages.add_exercise_states.st_preview import render_state_preview
+from ui_pages.add_exercise_states.st_select_exercise import render_state_select_exercise
+from ui_pages.add_exercise_states.st_exercise_data_input import render_state_exercise_data_input
+from ui_pages.add_exercise_states.st_preview import render_state_preview
 
 from config import SK_MAIN_DATA, TB_MAIN_DATA
 
@@ -46,6 +46,10 @@ def render_exercise_session_page(master_data_df, exercise_data_df):
 
         st.success("Session successfully written 🚀")
 
+        # ===== GUEST MODE - EXTRA MESSAGE =====
+        if st.session_state.get("guest_mode", False): # Return false if guest_mode not defined
+            st.info("Guest mode enabled — session not saved.")
+    
         if st.button("Add Another Session"):
             
             reset_exercise_flow()

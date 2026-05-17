@@ -1,0 +1,24 @@
+category,group,type,measurement,uom,exercise_key,exercise_measurement_key
+Gym,Push,Incline Bench Press,Weight,kg,gym_push_incline-bench-press,gym_push_incline-bench-press_weight_kg
+Gym,Push,Incline Bench Press,Reps,n,gym_push_incline-bench-press,gym_push_incline-bench-press_reps_n
+Gym,Push,Dumbbell Shoulder Press,Weight,kg,gym_push_dumbbell-shoulder-press,gym_push_dumbbell-shoulder-press_weight_kg
+Gym,Push,Dumbbell Shoulder Press,Reps,n,gym_push_dumbbell-shoulder-press,gym_push_dumbbell-shoulder-press_reps_n
+Gym,Push,Cable Chest Fly,Weight,kg,gym_push_cable-chest-fly,gym_push_cable-chest-fly_weight_kg
+Gym,Push,Cable Chest Fly,Reps,n,gym_push_cable-chest-fly,gym_push_cable-chest-fly_reps_n
+Gym,Pull,Barbell Row,Weight,kg,gym_pull_barbell-row,gym_pull_barbell-row_weight_kg
+Gym,Pull,Barbell Row,Reps,n,gym_pull_barbell-row,gym_pull_barbell-row_reps_n
+Gym,Pull,Pull Up,Reps,n,gym_pull_pull-up,gym_pull_pull-up_reps_n
+Gym,Pull,Face Pull,Weight,kg,gym_pull_face-pull,gym_pull_face-pull_weight_kg
+Gym,Pull,Face Pull,Reps,n,gym_pull_face-pull,gym_pull_face-pull_reps_n
+Gym,Legs,Front Squat,Weight,kg,gym_legs_front-squat,gym_legs_front-squat_weight_kg
+Gym,Legs,Front Squat,Reps,n,gym_legs_front-squat,gym_legs_front-squat_reps_n
+Gym,Legs,Hamstring Curl,Weight,kg,gym_legs_hamstring-curl,gym_legs_hamstring-curl_weight_kg
+Gym,Legs,Hamstring Curl,Reps,n,gym_legs_hamstring-curl,gym_legs_hamstring-curl_reps_n
+Running,Interval,Sprint Interval,Distance,m,running_interval_sprint-interval,running_interval_sprint-interval_distance_m
+Running,Interval,Sprint Interval,Time,s,running_interval_sprint-interval,running_interval_sprint-interval_time_s
+Running,Distance,Long Run,Distance,km,running_distance_long-run,running_distance_long-run_distance_km
+Running,Distance,Long Run,Pace,min/km,running_distance_long-run,running_distance_long-run_pace_min-km
+Cycling,Distance,Road Ride,Distance,km,cycling_distance_road-ride,cycling_distance_road-ride_distance_km
+Cycling,Distance,Road Ride,Average Speed,km/h,cycling_distance_road-ride,cycling_distance_road-ride_average-speed_km-h
+Cycling,Interval,Hill Repeats,Time,min,cycling_interval_hill-repeats,cycling_interval_hill-repeats_time_min
+Cycling,Interval,Hill Repeats,Power,w,cycling_interval_hill-repeats,cycling_interval_hill-repeats_power_w
