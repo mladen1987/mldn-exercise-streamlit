@@ -4,13 +4,13 @@
 
 A Streamlit-based learning project exploring state-driven UI design, modular Python architecture, and Google Sheets as a lightweight database.
 
-The app manages exercise master data and logs workout sessions with a structured, scalable workflow.
+The app manages exercise master data, logs workout sessions, and visualizes training progress with a structured, scalable workflow.
 
 ---
 
 ## 🚀 Version
 
-**v0.6.0 - Authentication + Guest Mode + Local Dummy Data Layer**
+**v0.7.0 - Analytics Dashboard + Contribution Heatmap + Progress Visualizations**
 
 ---
 
@@ -33,6 +33,30 @@ The app manages exercise master data and logs workout sessions with a structured
   - `dummy_data/backup_exercise_master_data_*.csv`
 - No persistent writes (read-only demo experience)
 - Safe sandbox for showcasing app features
+
+---
+
+### 📈 Analytics Dashboard (Landing Page)
+
+#### GitHub-Style Contribution Heatmap
+- Daily exercise activity visualization
+- One tile per day over the past 365 days
+- Week-based layout (Monday → Sunday)
+- Green tiles indicate workout activity
+- Dynamic yearly session count summary
+- Month labels above heatmap
+
+#### Progress Visualization System
+- Expandable category/group sections
+- Automatic chart generation from master data
+- Individual charts for every:
+  - Exercise type
+  - Measurement
+- Interactive line charts with:
+  - Date-based x-axis
+  - Value-based y-axis
+  - Hover tooltips
+- Fully data-driven visualization architecture
 
 ---
 
@@ -75,6 +99,7 @@ The app manages exercise master data and logs workout sessions with a structured
 - Streamlit
 - Python
 - Pandas
+- Altair
 - Google Sheets API (`gspread`)
 - Google Cloud Service Account Auth
 - Local CSV fallback system (guest mode)
@@ -88,9 +113,11 @@ The app manages exercise master data and logs workout sessions with a structured
   - **Production:** Google Sheets
   - **Guest mode:** Local CSV files
 - Conditional imports based on runtime mode
+- Modular visualization system
 - Clear separation of:
   - UI layers (`ui_pages/`)
   - Data services (`services/`)
+  - Visualization utilities (`utils/`)
   - Dummy data layer (`dummy_data/`)
 
 ---
@@ -108,7 +135,9 @@ The app manages exercise master data and logs workout sessions with a structured
 - [x] Session history visualization (spark bars + date view)
 - [x] Authentication system
 - [x] Guest mode (CSV-based sandbox)
-- [ ] Analytics dashboard - Landing Page
+- [x] Analytics dashboard
+- [x] Contribution heatmap
+- [x] Dynamic progress visualizations
 - [ ] Deployment improvements
 
 ---
@@ -119,3 +148,4 @@ The app manages exercise master data and logs workout sessions with a structured
 slit_venv
 pip install -r requirements.txt
 streamlit run app.py
+```
