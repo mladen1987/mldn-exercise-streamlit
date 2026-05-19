@@ -65,4 +65,5 @@ def render_exercise_session_page(master_data_df, exercise_data_df):
         if st.button("⬅ Back"):
 
             reset_exercise_flow()
+
             st.rerun()

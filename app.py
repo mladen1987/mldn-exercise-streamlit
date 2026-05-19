@@ -9,6 +9,7 @@ from services.data_layer.read_tabs import (
     get_exercise_df
 )
 
+from ui_pages.landing_page import render_landing_page
 from ui_pages.modify_master_data import render_master_data_page
 from ui_pages.add_exercise_session import render_exercise_session_page
 from ui_pages.login_screen import render_login_page
@@ -17,7 +18,11 @@ from ui_pages.login_screen import render_login_page
 # AUTH GATE
 # =========================
 if not st.session_state.get("authenticated"):
+    
+    st.title("🔐 Login")
+    
     render_login_page()
+    
     st.stop()
 
 # =========================
@@ -58,10 +63,20 @@ else:
 # ===============
 # TABS
 # ===============
-tab_exercise_session, tab_master_data = st.tabs([
-    "🏋️ Exercise Session",
+tab_landing_page, tab_exercise_session, tab_master_data = st.tabs([
+    "🏠 Home",
+    "🏋️ Add Exercise Session",
     "🧩 Master Data Manager"
 ])
+
+# ===============
+# DASHBOARD TAB
+# ===============
+with tab_landing_page:
+
+    st.title(f"🏠 Home")
+
+    render_landing_page(master_data_df, exercise_data_df)
 
 # ===============
 # EXERCISE SESSION
