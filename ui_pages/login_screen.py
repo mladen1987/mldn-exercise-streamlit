@@ -4,8 +4,6 @@ from services.authenticate import handle_login
 
 def render_login_page():
 
-    st.title("🔐 Login")
-
     password = st.text_input("Enter password", type="password")
 
     col1, col2 = st.columns(2)

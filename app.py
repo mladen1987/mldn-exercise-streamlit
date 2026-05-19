@@ -18,7 +18,11 @@ from ui_pages.login_screen import render_login_page
 # AUTH GATE
 # =========================
 if not st.session_state.get("authenticated"):
+    
+    st.title("🔐 Login")
+    
     render_login_page()
+    
     st.stop()
 
 # =========================
@@ -61,7 +65,7 @@ else:
 # ===============
 tab_landing_page, tab_exercise_session, tab_master_data = st.tabs([
     "🏠 Home",
-    "🏋️ Exercise Session",
+    "🏋️ Add Exercise Session",
     "🧩 Master Data Manager"
 ])
 
@@ -72,7 +76,7 @@ with tab_landing_page:
 
     st.title(f"🏠 Home")
 
-    render_landing_page(exercise_data_df)
+    render_landing_page(master_data_df, exercise_data_df)
 
 # ===============
 # EXERCISE SESSION
