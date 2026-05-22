@@ -7,6 +7,7 @@ from utils.data_type_helpers import ensure_list
 from config import (
     CATEGORY_COLUMN_MD,
     GROUP_COLUMN_MD,
+    SUB_GROUP_COLUMN_MD,
     TYPE_COLUMN_MD,
     MEASUREMENT_COLUMN_MD
 )
@@ -45,6 +46,28 @@ def get_unique_groups(df, category):
         return_val = []
     
     return return_val
+
+def get_unique_sub_groups(df, category, group):
+
+    category = ensure_list(category)
+    group = ensure_list(group)
+
+    if category and group:
+        sub_groups = (
+            df[
+                (df[CATEGORY_COLUMN_MD].isin(category))
+                & (df[GROUP_COLUMN_MD].isin(group))
+            ][SUB_GROUP_COLUMN_MD]
+            .dropna()
+            .astype(str)
+            .str.strip()
+            .unique()
+            .tolist()
+        )
+
+        return sorted(sub_groups)
+
+    return []
 
 def get_unique_types(df, category, group):
     category = ensure_list(category)

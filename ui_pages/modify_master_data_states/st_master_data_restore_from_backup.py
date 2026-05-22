@@ -23,6 +23,7 @@ from config import (
     # Column Names
     CATEGORY_COLUMN_MD,
     GROUP_COLUMN_MD,
+    SUB_GROUP_COLUMN_MD,
     TYPE_COLUMN_MD,
     MEASUREMENT_COLUMN_MD,
     UOM_COLUMN_MD
@@ -57,9 +58,18 @@ def render_master_data_restore_from_backup_state():
 
         st.subheader("Preview Backup Data")
 
-        st.dataframe(backup_df[
-            [CATEGORY_COLUMN_MD, GROUP_COLUMN_MD, TYPE_COLUMN_MD, MEASUREMENT_COLUMN_MD, UOM_COLUMN_MD]
-        ])
+        st.dataframe(
+            backup_df[
+                [
+                    CATEGORY_COLUMN_MD,
+                    GROUP_COLUMN_MD,
+                    SUB_GROUP_COLUMN_MD,   # NEW
+                    TYPE_COLUMN_MD,
+                    MEASUREMENT_COLUMN_MD,
+                    UOM_COLUMN_MD
+                ]
+            ]
+        )
 
         # Restore section
         st.warning("⚠️ This will overwrite current Master Data")

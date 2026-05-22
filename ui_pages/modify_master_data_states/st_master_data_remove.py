@@ -29,6 +29,7 @@ from config import (
     # Column Names
     CATEGORY_COLUMN_MD,
     GROUP_COLUMN_MD,
+    SUB_GROUP_COLUMN_MD,
     TYPE_COLUMN_MD,
     MEASUREMENT_COLUMN_MD,
     UOM_COLUMN_MD
@@ -109,6 +110,7 @@ def render_master_data_remove_state(master_data_df):
             st.dataframe(df_rows_to_remove[
                 [CATEGORY_COLUMN_MD,
                 GROUP_COLUMN_MD,
+                SUB_GROUP_COLUMN_MD,
                 TYPE_COLUMN_MD,
                 MEASUREMENT_COLUMN_MD,
                 UOM_COLUMN_MD]
