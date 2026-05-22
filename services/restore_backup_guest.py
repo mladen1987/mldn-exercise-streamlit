@@ -1,16 +1,15 @@
 import os
-from datetime import datetime
 import pandas as pd
 import streamlit as st
+from datetime import datetime
+from pathlib import Path
 
 def list_backups_guest_mode(client=None, backup_sheet_key=None):
 
-    backup_dir = "dummy_data"
-
+    backup_dir = Path(__file__).resolve().parent.parent / "dummy_data"
+        
     files = [
-        f for f in os.listdir(backup_dir)
-        if f.startswith("backup_exercise_master_data_")
-        and f.endswith(".csv")
+        f.name for f in backup_dir.glob("backup_exercise_master_data_*.csv")
     ]
 
     backup_items = []
