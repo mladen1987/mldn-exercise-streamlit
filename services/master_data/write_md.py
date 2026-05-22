@@ -1,5 +1,4 @@
 import pandas as pd
-from streamlit import st
 
 # Modules
 from services.google_sheets import (

@@ -1,5 +1,3 @@
-import streamlit as st
-
 from utils.visualizations import (
     render_contribution_heatmap,
     render_progress_charts
