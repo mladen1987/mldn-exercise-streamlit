@@ -15,6 +15,7 @@ from config import (
     # Column Names
     CATEGORY_COLUMN_MD,
     GROUP_COLUMN_MD,
+    SUB_GROUP_COLUMN_MD,
     TYPE_COLUMN_MD,
     MEASUREMENT_COLUMN_MD,
     UOM_COLUMN_MD,
@@ -22,7 +23,7 @@ from config import (
     EXERCISE_MEASUREMENT_KEY_COLUMN_MD
 )
 
-def build_new_master_data_rows(category, group, type_, measurements):
+def build_new_master_data_rows(category, group, sub_group, type_, measurements):
     new_rows = []
 
     base_key = f"{category}_{group}_{type_}".lower().replace(" ", "-")
@@ -35,6 +36,7 @@ def build_new_master_data_rows(category, group, type_, measurements):
             new_rows.append({
                 CATEGORY_COLUMN_MD: category,
                 GROUP_COLUMN_MD: group,
+                SUB_GROUP_COLUMN_MD: sub_group,
                 TYPE_COLUMN_MD: type_,
                 MEASUREMENT_COLUMN_MD: measurement,
                 UOM_COLUMN_MD: uom,

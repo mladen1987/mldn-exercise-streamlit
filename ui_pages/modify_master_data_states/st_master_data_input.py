@@ -5,6 +5,7 @@ from services.data_layer.clear_caches import clear_master_data_cache
 from services.master_data.read_md import (
     get_unique_categories,
     get_unique_groups,
+    get_unique_sub_groups,
     get_unique_types,
 )
 
@@ -54,8 +55,26 @@ def render_master_data_input_state(master_data_df):
         else:
             selected_group = None
 
-        # ===== Select Type =====
+        # ===== Select Sub-group =====
         if selected_group:
+
+            sub_groups = get_unique_sub_groups(
+                master_data_df,
+                selected_category,
+                selected_group
+            )
+
+            selected_sub_group = select_or_create(
+                label="Select or Create Sub-group",
+                options=sub_groups,
+                new_label="➕ Add New Sub-group"
+            )
+
+        else:
+            selected_sub_group = None
+
+        # ===== Select Type =====
+        if selected_sub_group:
             types = get_unique_types(master_data_df, selected_category, selected_group)
 
             selected_type = select_or_create(
@@ -82,10 +101,11 @@ def render_master_data_input_state(master_data_df):
                 new_rows = build_new_master_data_rows(
                     selected_category,
                     selected_group,
+                    selected_sub_group,
                     selected_type,
                     measurements
                 )
-
+                
                 master_data_df = append_new_master_data_rows(new_rows, master_data_df)
 
                 master_data_export(master_data_df)

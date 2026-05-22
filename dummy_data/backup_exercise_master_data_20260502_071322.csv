@@ -1,19 +1,19 @@
-category,group,type,measurement,uom,exercise_key,exercise_measurement_key
-Gym,Upper,Flat Bench Press,Weight,kg,gym_upper_flat-bench-press,gym_upper_flat-bench-press_weight_kg
-Gym,Upper,Flat Bench Press,Reps,n,gym_upper_flat-bench-press,gym_upper_flat-bench-press_reps_n
-Gym,Upper,Seated Cable Row,Weight,kg,gym_upper_seated-cable-row,gym_upper_seated-cable-row_weight_kg
-Gym,Upper,Seated Cable Row,Reps,n,gym_upper_seated-cable-row,gym_upper_seated-cable-row_reps_n
-Gym,Upper,Lateral Raise,Weight,kg,gym_upper_lateral-raise,gym_upper_lateral-raise_weight_kg
-Gym,Upper,Lateral Raise,Reps,n,gym_upper_lateral-raise,gym_upper_lateral-raise_reps_n
-Gym,Lower,Romanian Deadlift,Weight,kg,gym_lower_romanian-deadlift,gym_lower_romanian-deadlift_weight_kg
-Gym,Lower,Romanian Deadlift,Reps,n,gym_lower_romanian-deadlift,gym_lower_romanian-deadlift_reps_n
-Gym,Lower,Walking Lunge,Distance,m,gym_lower_walking-lunge,gym_lower_walking-lunge_distance_m
-Gym,Lower,Walking Lunge,Weight,kg,gym_lower_walking-lunge,gym_lower_walking-lunge_weight_kg
-Swimming,Distance,Freestyle Swim,Distance,m,swimming_distance_freestyle-swim,swimming_distance_freestyle-swim_distance_m
-Swimming,Distance,Freestyle Swim,Time,min,swimming_distance_freestyle-swim,swimming_distance_freestyle-swim_time_min
-Swimming,Interval,Pool Sprints,Distance,m,swimming_interval_pool-sprints,swimming_interval_pool-sprints_distance_m
-Swimming,Interval,Pool Sprints,Time,s,swimming_interval_pool-sprints,swimming_interval_pool-sprints_time_s
-Cycling,Endurance,Endurance Ride,Distance,km,cycling_endurance_endurance-ride,cycling_endurance_endurance-ride_distance_km
-Cycling,Endurance,Endurance Ride,Heart Rate,bpm,cycling_endurance_endurance-ride,cycling_endurance_endurance-ride_heart-rate_bpm
-Cycling,Sprint,Track Sprint,Power,w,cycling_sprint_track-sprint,cycling_sprint_track-sprint_power_w
-Cycling,Sprint,Track Sprint,Time,s,cycling_sprint_track-sprint,cycling_sprint_track-sprint_time_s
+category,group,sub_group,type,measurement,uom,exercise_key,exercise_measurement_key
+Gym,Upper,Upper Body,Flat Bench Press,Weight,kg,gym_upper_flat-bench-press,gym_upper_flat-bench-press_weight_kg
+Gym,Upper,Upper Body,Flat Bench Press,Reps,n,gym_upper_flat-bench-press,gym_upper_flat-bench-press_reps_n
+Gym,Upper,Upper Body,Seated Cable Row,Weight,kg,gym_upper_seated-cable-row,gym_upper_seated-cable-row_weight_kg
+Gym,Upper,Upper Body,Seated Cable Row,Reps,n,gym_upper_seated-cable-row,gym_upper_seated-cable-row_reps_n
+Gym,Upper,Upper Body,Lateral Raise,Weight,kg,gym_upper_lateral-raise,gym_upper_lateral-raise_weight_kg
+Gym,Upper,Upper Body,Lateral Raise,Reps,n,gym_upper_lateral-raise,gym_upper_lateral-raise_reps_n
+Gym,Lower,Legs,Romanian Deadlift,Weight,kg,gym_lower_romanian-deadlift,gym_lower_romanian-deadlift_weight_kg
+Gym,Lower,Legs,Romanian Deadlift,Reps,n,gym_lower_romanian-deadlift,gym_lower_romanian-deadlift_reps_n
+Gym,Lower,Legs,Walking Lunge,Distance,m,gym_lower_walking-lunge,gym_lower_walking-lunge_distance_m
+Gym,Lower,Legs,Walking Lunge,Weight,kg,gym_lower_walking-lunge,gym_lower_walking-lunge_weight_kg
+Swimming,Distance,Stamina,Freestyle Swim,Distance,m,swimming_distance_freestyle-swim,swimming_distance_freestyle-swim_distance_m
+Swimming,Distance,Stamina,Freestyle Swim,Time,min,swimming_distance_freestyle-swim,swimming_distance_freestyle-swim_time_min
+Swimming,Interval,Speed,Pool Sprints,Distance,m,swimming_interval_pool-sprints,swimming_interval_pool-sprints_distance_m
+Swimming,Interval,Speed,Pool Sprints,Time,s,swimming_interval_pool-sprints,swimming_interval_pool-sprints_time_s
+Cycling,Endurance,Stamina,Endurance Ride,Distance,km,cycling_endurance_endurance-ride,cycling_endurance_endurance-ride_distance_km
+Cycling,Endurance,Stamina,Endurance Ride,Heart Rate,bpm,cycling_endurance_endurance-ride,cycling_endurance_endurance-ride_heart-rate_bpm
+Cycling,Sprint,Speed,Track Sprint,Power,w,cycling_sprint_track-sprint,cycling_sprint_track-sprint_power_w
+Cycling,Sprint,Speed,Track Sprint,Time,s,cycling_sprint_track-sprint,cycling_sprint_track-sprint_time_s

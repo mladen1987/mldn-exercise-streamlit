@@ -42,19 +42,19 @@ def render_state_exercise_data_input(master_data_df, exercise_data_df):
     )
 
     # Render all measurements for each type together under an expander
-    for type_name, measurements in grouped_types.items():
-        
-        with st.expander(type_name):
-            
+    for (sub_group, type_name), measurements in grouped_types.items():
+    
+        with st.expander(f"{sub_group} · {type_name}"):
+
             for m in measurements:
-                
+
                 label = f"{m['measurement']} ({m['uom']})"
-                
+
                 measurement_history = historical_data_df[
                     (historical_data_df["type"] == type_name)
                     & (historical_data_df["measurement"] == m["measurement"])
                 ].sort_values("date", ascending=False)
-                
+
                 if not measurement_history.empty:
 
                     values = measurement_history["value"].astype(float).tolist()
@@ -69,8 +69,7 @@ def render_state_exercise_data_input(master_data_df, exercise_data_df):
                             f"{row['value']} {row['uom']}  "
                             f"{bar}"
                         )
-                
-                # Take a number input for each measurement
+
                 st.number_input(
                     label=label,
                     key=m["exercise_measurement_key"]
