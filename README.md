@@ -1,6 +1,6 @@
 # Exercise Tracker
 
-**v1.0.0 – First Deployment**
+**v1.0.1 – First Deployment**
 
 ## 📊 Overview
 
