@@ -3,6 +3,7 @@ import pandas as pd
 from config import (
     CATEGORY_COLUMN_MD,
     GROUP_COLUMN_MD,
+    SUB_GROUP_COLUMN_MD,
     TYPE_COLUMN_MD,
     MEASUREMENT_COLUMN_MD,
     UOM_COLUMN_MD,
@@ -23,6 +24,7 @@ def get_types_for_group(
             (master_data_df[CATEGORY_COLUMN_MD] == category)
             & (master_data_df[GROUP_COLUMN_MD] == group)
         ][[
+            SUB_GROUP_COLUMN_MD,
             TYPE_COLUMN_MD,
             MEASUREMENT_COLUMN_MD,
             UOM_COLUMN_MD,
@@ -30,11 +32,19 @@ def get_types_for_group(
             EXERCISE_MEASUREMENT_KEY_COLUMN_MD
         ]]
         .drop_duplicates()
-        .sort_values([TYPE_COLUMN_MD, MEASUREMENT_COLUMN_MD])
         .to_dict(orient="records")
     )
 
-    return types
+    sorted_types = sorted(
+        types,
+        key=lambda x: (
+            x[SUB_GROUP_COLUMN_MD],
+            x[TYPE_COLUMN_MD],
+            x[MEASUREMENT_COLUMN_MD]
+        )
+    )
+
+    return sorted_types
 
 def group_measurements_by_type(type_rows):
 
@@ -42,12 +52,15 @@ def group_measurements_by_type(type_rows):
 
     for row in type_rows:
 
-        type_name = row[TYPE_COLUMN_MD]
+        key = (
+            row[SUB_GROUP_COLUMN_MD],
+            row[TYPE_COLUMN_MD]
+        )
 
-        if type_name not in grouped:
-            grouped[type_name] = []
+        if key not in grouped:
+            grouped[key] = []
 
-        grouped[type_name].append(row)
+        grouped[key].append(row)
 
     return grouped
 

@@ -26,6 +26,7 @@ VALUE_COLUMN = "value"
 # ===== MASTER DATA COLUMN =====
 CATEGORY_COLUMN_MD = "category"
 GROUP_COLUMN_MD = "group"
+SUB_GROUP_COLUMN_MD = "sub_group"
 TYPE_COLUMN_MD = "type"
 MEASUREMENT_COLUMN_MD = "measurement"
 UOM_COLUMN_MD = "uom"
