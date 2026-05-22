@@ -1,5 +1,5 @@
 import pandas as pd
-from turtle import st
+from streamlit import st
 
 # Modules
 from services.google_sheets import (
