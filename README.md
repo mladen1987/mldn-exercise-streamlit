@@ -1,6 +1,6 @@
 # Exercise Tracker
 
-**v0.7.0 – Progress Visualizations**
+**v1.0.0 – First Deployment**
 
 ## 📊 Overview
 
