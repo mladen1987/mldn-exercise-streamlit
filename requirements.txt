@@ -11,4 +11,4 @@ cachetools==7.0.6
 tenacity==9.1.4
 protobuf==7.34.1
 streamlit-autorefresh==1.0.1
-cryptography
+cryptography==47.0.0
