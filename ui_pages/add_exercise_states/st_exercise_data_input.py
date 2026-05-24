@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+from datetime import datetime
+from streamlit_autorefresh import st_autorefresh
 
 from utils.visualize_helpers import render_spark_bar
 
@@ -12,6 +14,17 @@ from services.add_session.read_session_data import (
 from services.add_session.write_session_data import build_session_rows
 
 def render_state_exercise_data_input(master_data_df, exercise_data_df):
+
+    # ===== TIMER STATE =====
+    if "timer_running" not in st.session_state:
+        st.session_state["timer_running"] = False
+
+    if "timer_start" not in st.session_state:
+        st.session_state["timer_start"] = None
+
+    # ===== TIMER AUTO REFRESH =====
+    if st.session_state["timer_running"]:
+        st_autorefresh(interval=1000, key="exercise_timer_refresh")
     
     # No Selections Made - Safety Check
     if not st.session_state.get("selected_group") or not st.session_state.get("selected_category"):
@@ -41,6 +54,46 @@ def render_state_exercise_data_input(master_data_df, exercise_data_df):
             5
     )
 
+    # ===== STOPWATCH STATE LOGIC =====
+    st.divider()
+    st.subheader("⏱ Stopwatch")
+
+    col1, col2, col3 = st.columns([1,1,2])
+
+    with col1:
+        if st.button("▶ Start"):
+
+            st.session_state["timer_running"] = True
+            st.session_state["timer_start"] = datetime.now()
+
+            st.rerun()
+
+    with col2:
+        if st.button("🔄 Reset"):
+
+            st.session_state["timer_running"] = False
+            st.session_state["timer_start"] = None
+
+            st.rerun()
+
+    # ===== STOPWATCH VISUALIZE =====
+    if (
+        st.session_state["timer_running"]
+        and st.session_state["timer_start"] is not None
+    ):
+
+        elapsed = datetime.now() - st.session_state["timer_start"]
+
+        total_seconds = int(elapsed.total_seconds())
+
+        minutes = total_seconds // 60
+        seconds = total_seconds % 60
+
+        st.success(f"⏱ {minutes:02}:{seconds:02}")
+
+    else:
+        st.info("Timer not running")
+    
     # Render all measurements for each type together under an expander
     for (sub_group, type_name), measurements in grouped_types.items():
     
