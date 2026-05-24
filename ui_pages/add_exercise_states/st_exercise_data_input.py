@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+from streamlit_autorefresh import st_autorefresh
 
 from utils.visualize_helpers import render_spark_bar
 
@@ -20,6 +21,10 @@ def render_state_exercise_data_input(master_data_df, exercise_data_df):
 
     if "timer_start" not in st.session_state:
         st.session_state["timer_start"] = None
+
+    # ===== TIMER AUTO REFRESH =====
+    if st.session_state["timer_running"]:
+        st_autorefresh(interval=1000, key="exercise_timer_refresh")
     
     # No Selections Made - Safety Check
     if not st.session_state.get("selected_group") or not st.session_state.get("selected_category"):
